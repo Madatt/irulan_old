@@ -3,17 +3,28 @@ project(irulan)
 set(CMAKE_CXX_STANDARD 17)
 
 set(INCLUDES
+        include/
         include/irulan
+        include/KHR
+        include/glad
+        include/SDL2
         )
 
 set(SOURCES
+        src/glad/glad.c
+
         src/irulan/Math/Matrix.cpp
         src/irulan/Math/Quaternion.cpp
         src/irulan/Math/Vector3.cpp
-        include/irulan/irulan.h)
 
-
+        src/irulan/Graph/VertexArray.cpp
+        src/irulan/Graph/VertexBuffer.cpp
+        src/irulan/Graph/Renderer.cpp
+        src/irulan/Graph/Shader.cpp
+        src/irulan/Graph/Texture.cpp
+        src/irulan/Graph/Texture2D.cpp
+        src/irulan/App.cpp
+        )
 
 include_directories(${INCLUDES})
-
 add_library(irulan ${SOURCES})
