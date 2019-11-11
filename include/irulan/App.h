@@ -14,6 +14,7 @@ namespace Iru {
     struct MouseInfo {
         int x = 0;
         int y = 0;
+        unsigned int time = 0;
     };
 
     class App {

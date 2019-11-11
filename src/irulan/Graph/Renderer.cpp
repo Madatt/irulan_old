@@ -59,6 +59,8 @@ namespace Iru {
 
 
     void Renderer::clear() {
+        glClearColor(1.0, 0.0, 0.0, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT);
         flush();
     }
 }

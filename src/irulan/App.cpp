@@ -72,6 +72,7 @@ namespace Iru {
             case SDL_MOUSEMOTION:
                 m_mi.x = t_e.motion.x;
                 m_mi.y = t_e.motion.y;
+                m_mi.time = SDL_GetTicks();
                 break;
         }
     }

@@ -9,9 +9,6 @@
 
 namespace Iru {
     Texture2D::Texture2D() {
-        glGenTextures(1, &m_id);
-        glBindTexture(GL_TEXTURE_2D, m_id);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 0, 0, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
     }
 
     Texture2D::Texture2D(Image t_img, Format t_for) {
@@ -40,6 +37,13 @@ namespace Iru {
         glBindTexture(GL_TEXTURE_2D, m_id);
         glTexImage2D(GL_TEXTURE_2D, 0, t_f, t_w, t_h, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
 
+    }
+
+    void Texture2D::generate(){
+        if(!m_id)
+            return;
+        glGenTextures(1, &m_id);
+        glBindTexture(GL_TEXTURE_2D, m_id);
     }
 
     void Texture2D::setData(int t_x, int t_y, int t_w, int t_h, Format t_f, void *data) {

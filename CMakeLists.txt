@@ -23,8 +23,13 @@ set(SOURCES
         src/irulan/Graph/Shader.cpp
         src/irulan/Graph/Texture.cpp
         src/irulan/Graph/Texture2D.cpp
+
+        src/irulan/Misc/Timer.cpp
+
         src/irulan/App.cpp
         )
 
 include_directories(${INCLUDES})
 add_library(irulan ${SOURCES})
+
+add_subdirectory(test)

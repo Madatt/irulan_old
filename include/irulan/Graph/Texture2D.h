@@ -17,6 +17,7 @@ namespace Iru {
         Texture2D(int t_w, int t_h);
         Texture2D(int t_w, int t_h, Format t_f);
 
+        void generate();
         void setData(int t_x, int t_y, int t_w, int t_h, Format t_f, void *data);
         void setFiltering(Filtering t_fil);
     };
