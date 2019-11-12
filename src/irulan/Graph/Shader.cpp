@@ -6,6 +6,7 @@
 #include "Graph/Shader.h"
 #include "Math/Matrix.h"
 #include "glad/glad.h"
+#include <iostream>
 
 namespace Iru {
     Shader::Shader() {
@@ -61,7 +62,7 @@ namespace Iru {
         glGetShaderiv(m_vid, GL_COMPILE_STATUS, &succ);
         if (!succ) {
             glGetShaderInfoLog(m_vid, 512, NULL, msg);
-            //log() << "[Error] Vertex compilation failed: " << msg;
+            //std::cout << "[Error] Vertex compilation failed: " << msg;
             m_vid = 0;
         }
     }

@@ -28,7 +28,8 @@ namespace Iru {
     }
 
     void VertexArray::enableAttrib(unsigned int t_i) {
-        glEnableVertexArrayAttrib(m_id, t_i);
+        use();
+        glEnableVertexAttribArray(t_i);
     }
 }
 
