@@ -6,6 +6,7 @@
 #define IRULAN_TESTAPP_H
 
 #include "irulan.h"
+#include "irulan_e.h"
 
 class TestApp : public Iru::App{
 
@@ -20,6 +21,12 @@ private:
     Iru::VertexBuffer* vbo;
     Iru::VertexArray* vao;
     Iru::Shader* shd;
+
+    Iru::VertexBuffer* vbo2;
+    Iru::VertexArray* vao2;
+    Iru::Shader* shd2;
+
+
     unsigned int vv;
 
     Iru::Matrix Proj;
@@ -31,6 +38,8 @@ private:
     Iru::Vector3 frm;
 
     Iru::Texture2D tex;
+    IruE::BitmapFont font;
+    IruE::Text text;
 };
 
 

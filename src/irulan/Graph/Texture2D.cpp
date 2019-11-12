@@ -3,6 +3,10 @@
 //
 
 
+#include <cstring>
+#include <cmath>
+#include <fstream>
+#include <iostream>
 #include "Graph/Texture2D.h"
 #include "glad/glad.h"
 
@@ -55,5 +59,35 @@ namespace Iru {
         glBindTexture(GL_TEXTURE_2D, m_id);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, t_fil);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, t_fil);
+    }
+
+
+    Texture2D Texture2D::_loadBMP(std::string t_path) {
+        std::ifstream file(t_path, std::ios::binary);
+        if (!file.is_open()) {
+            std::cout << "asdas";
+        }
+
+        char info[54];
+        file.read(info, 54);
+
+        Image img;
+        int pos;
+
+        memcpy(&img.width, info + 18, sizeof(int));
+        memcpy(&img.height, info + 22, sizeof(int));
+        memcpy(&pos, info + 0x0A, sizeof(int));
+
+        file.seekg(pos, file.beg);
+
+        int off = std::ceil(24.0 * (double)img.width / 32.0) * 4;
+        int size = off * img.height ;
+        img.data = new unsigned char [size];
+
+        file.read((char*)img.data, size);
+
+        Texture2D tex(img, BGR);
+
+        return tex;
     }
 }

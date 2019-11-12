@@ -7,8 +7,6 @@
 
 namespace Iru {
     struct Image {
-        ~Image() { if (data != nullptr) delete data; };
-
         int width;
         int height;
         unsigned char *data = nullptr;
@@ -20,6 +18,9 @@ namespace Iru {
 
     public:
         virtual ~Texture();
+
+        int getWidth(){ return m_width;};
+        int getHeight(){ return m_height;};
 
     protected:
         Texture();

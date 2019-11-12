@@ -27,10 +27,21 @@ void TestApp::draw(double t_delta) {
 
     shd->setMatrix("aPos2", Proj);
     shd->setInt("atexture", 0);
-    //renderer.setTexture(&tex, 0);
+    renderer.setTexture(&tex, 0);
     renderer.setVA(vao);
     renderer.setShader(shd);
-    renderer.drawArrays(Iru::TRIANGLES, 0, 6);
+    //renderer.drawArrays(Iru::TRIANGLES, 0, 6);
+    renderer.flush();
+
+    Proj = Iru::Matrix();
+
+    shd2->setMatrix("aPos2", Proj);
+    shd2->setInt("atexture", 0);
+    renderer.setTexture(&tex, 0);
+    renderer.setShader(shd2);
+    renderer.setVA(vao2);
+    renderer.drawArrays(Iru::TRIANGLES, 0, 5);
+    renderer.flush();
 
     flip();
 }
@@ -61,6 +72,28 @@ void TestApp::init() {
                         "{\n"
                         "    FragColor = vec4(1, 1, 1,1)*texture(atexture, Tex);\n"
                         "} ";
+
+    std::string vers2 = "#version 330 core\n"
+                       "layout (location = 0) in vec2 aPos;\n"
+                       "layout (location = 1) in vec2 aTex;\n"
+                       "uniform mat4 aPos2;\n"
+                       "out vec2 Tex;\n"
+                       "\n"
+                       "void main()\n"
+                       "{\n"
+                       "    gl_Position = aPos2 * vec4(aPos.x, aPos.y, 0.0, 1.0);\n"
+                       "    Tex = aTex;\n"
+                       "}";
+
+    std::string frags2 = "#version 330 core\n"
+                        "out vec4 FragColor;\n"
+                        "in vec2 Tex;\n"
+                        "uniform sampler2D atexture;\n"
+                        "void main()\n"
+                        "{\n"
+                        "    FragColor = vec4(1, 1, 1,1)*texture(atexture, Tex);\n"
+                        "} ";
+
 
 
     setDimensions(1280, 720);
@@ -94,6 +127,7 @@ void TestApp::init() {
 
 
     shd = new Iru::Shader(vers, frags);
+    shd2 = new Iru::Shader(vers2, frags2);
 
 
     forw = Iru::Vector3(0, 0, 4);
@@ -105,7 +139,24 @@ void TestApp::init() {
     //resources.loadMesh("test.txt");
 
 
-    //tex = resources.loadBMP("test.bmp");
-    //tex.setFiltering(NEAREST);
+    tex = Iru::Texture2D::_loadBMP("font.bmp");
+    tex.setFiltering(Iru::NEAREST);
+
+    font.setTexture(tex, 7, 18);
+
+    text.setFont(font);
+    text.set("gowno");
+    text.construct();
+
+    vao2 = new Iru::VertexArray();
+    vbo2 = new Iru::VertexBuffer();
+
+
+    vao2->setAttrib(*vbo2, 0, 4, Iru::FLOAT, 4 * sizeof(float), (void *) 0);
+    //vao2->setAttrib(*vbo2, 1, 4, Iru::FLOAT, 4 * sizeof(float), (void *) (18 * sizeof(float)));
+
+
+    vbo2->setData(text.getVers().size() * sizeof(float) ,text.getVers().data());
+
 
 }
