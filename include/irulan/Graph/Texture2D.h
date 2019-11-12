@@ -6,6 +6,7 @@
 #define RSMOL_TEXTURE2D_H
 
 #include "Defines.h"
+#include "Graph/Texture.h"
 
 namespace Iru {
     class Texture2D : public Texture {

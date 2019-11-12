@@ -2,8 +2,7 @@
 // Created by Madatt on 19.09.2019.
 //
 
-#include <iostream>
-#include "Graph/Texture.h"
+
 #include "Graph/Texture2D.h"
 #include "glad/glad.h"
 

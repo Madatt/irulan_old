@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(INCLUDES
         include/
         include/irulan
+        include/irulan_e
         include/KHR
         include/glad
         include/SDL2
@@ -27,6 +28,10 @@ set(SOURCES
         src/irulan/Misc/Timer.cpp
 
         src/irulan/App.cpp
+
+        src/irulan_e/Graph2D/Text.cpp
+        src/irulan_e/Graph2D/BitmapFont.cpp
+        src/irulan_e/Graph2D/Sprite.cpp
         )
 
 include_directories(${INCLUDES})
