@@ -27,7 +27,9 @@ set(SOURCES
 
         src/irulan/Misc/Timer.cpp
 
+        src/irulan/gl_debug.cpp
         src/irulan/App.cpp
+
 
         src/irulan_e/Graph2D/Text.cpp
         src/irulan_e/Graph2D/BitmapFont.cpp

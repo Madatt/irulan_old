@@ -4,7 +4,9 @@
 
 #include "App.h"
 #include "glad.h"
+#include "gl_debug.h"
 #include <iostream>
+
 
 namespace Iru {
     App::App()
@@ -22,6 +24,11 @@ namespace Iru {
                                     SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                     m_width, m_height,
                                     SDL_WINDOW_OPENGL);
+
+        SDL_GL_SetAttribute(
+                SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG
+        );
+
         m_context = SDL_GL_CreateContext(m_window);
         if (m_context == nullptr) {
             close();
@@ -32,6 +39,14 @@ namespace Iru {
             close();
             return;
         }
+
+        glEnable(GL_DEBUG_OUTPUT);
+        glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+        glDebugMessageCallback(openglCallbackFunction, nullptr);
+        glDebugMessageControl(
+                GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, NULL, true
+        );
+
 
         glViewport(0, 0, m_width, m_height);
         m_init = true;

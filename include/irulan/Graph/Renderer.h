@@ -11,6 +11,7 @@
 namespace Iru {
     class Game;
     class VertexArray;
+    class VertexBuffer;
     class Shader;
     class Texture;
 
@@ -25,7 +26,6 @@ namespace Iru {
         void setTexture(Texture *t_tex, int t_n);
 
         void drawArrays(Polygon t_type, int t_s, int t_c);
-        //void drawMesh(Mesh &t_mesh);
 
         void flush();
         void clear();
@@ -33,8 +33,6 @@ namespace Iru {
         VertexArray *m_va = nullptr;
         Shader *m_shader = nullptr;
         Texture *m_texture[16]{};
-
-        bool m_ok = 0;
     };
 }
 #endif //RSMOL_RENDERER_H

@@ -19,16 +19,34 @@ namespace Iru {
         link();
     }
 
+    Shader::Shader(Shader &&t_r) {
+        m_id = t_r.m_id;
+        m_vid = t_r.m_vid;
+        m_fid = t_r.m_fid;
+
+        t_r.m_id = 0;
+        t_r.m_vid = 0;
+        t_r.m_fid = 0;
+
+    }
+
+    Shader &Shader::operator=(Shader &&t_r) {
+        if(this != &t_r)
+        {
+            release();
+            m_id = t_r.m_id;
+            m_vid = t_r.m_vid;
+            m_fid = t_r.m_fid;
+
+            t_r.m_id = 0;
+            t_r.m_vid = 0;
+            t_r.m_fid = 0;
+        }
+        return *this;
+    }
 
     Shader::~Shader() {
-        if (m_id)
-            glDeleteProgram(m_id);
-
-        if (m_vid)
-            glDeleteShader(m_vid);
-
-        if (m_fid)
-            glDeleteShader(m_fid);
+        release();
     }
 
 
@@ -37,11 +55,13 @@ namespace Iru {
     }
 
     void Shader::setMatrix(std::string t_name, Matrix &t_mat) {
-        glUniformMatrix4fv(glGetUniformLocation(m_id, t_name.c_str()), 1, false, t_mat.getPtr());
+        if(m_id)
+            glProgramUniformMatrix4fv(m_id ,glGetUniformLocation(m_id, t_name.c_str()), 1, false, t_mat.getPtr());
     }
 
     void Shader::setInt(std::string t_name, int t_val) {
-        glUniform1i(glGetUniformLocation(m_id, t_name.c_str()), t_val);
+        if(m_id)
+            glProgramUniform1i(m_id, glGetUniformLocation(m_id, t_name.c_str()), t_val);
     }
 
     bool Shader::check() {
@@ -62,7 +82,7 @@ namespace Iru {
         glGetShaderiv(m_vid, GL_COMPILE_STATUS, &succ);
         if (!succ) {
             glGetShaderInfoLog(m_vid, 512, NULL, msg);
-            //std::cout << "[Error] Vertex compilation failed: " << msg;
+            std::cout << "[Error] Vertex compilation failed: " << msg;
             m_vid = 0;
         }
     }
@@ -81,7 +101,7 @@ namespace Iru {
         glGetShaderiv(m_fid, GL_COMPILE_STATUS, &succ);
         if (!succ) {
             glGetShaderInfoLog(m_fid, 512, NULL, msg);
-            //log() << "[Error] Fragment compilation failed: " << msg;
+            std::cout << "[Error] Fragment compilation failed: " << msg;
             m_fid = 0;
         }
     }
@@ -111,4 +131,20 @@ namespace Iru {
         glDeleteShader(m_fid);
         glDeleteShader(m_vid);
     }
+
+    void Shader::release() {
+        if (m_id)
+            glDeleteProgram(m_id);
+
+        if (m_vid)
+            glDeleteShader(m_vid);
+
+        if (m_fid)
+            glDeleteShader(m_fid);
+
+        m_id = 0;
+        m_vid = 0;
+        m_fid = 0;
+    }
+
 }

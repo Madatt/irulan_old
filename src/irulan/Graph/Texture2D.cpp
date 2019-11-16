@@ -11,61 +11,68 @@
 #include "glad/glad.h"
 
 namespace Iru {
-    Texture2D::Texture2D() {
-    }
-
-    Texture2D::Texture2D(Image t_img, Format t_for) {
+    Texture2D::Texture2D(Image t_img) {
         m_width = t_img.width;
         m_height = t_img.height;
 
-        glGenTextures(1, &m_id);
-        glBindTexture(GL_TEXTURE_2D, m_id);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, t_img.width, t_img.height, 0, t_for, GL_UNSIGNED_BYTE, t_img.data);
+        setData(0, 0, m_width, m_height, Iru::BGR, t_img.data);
     }
 
     Texture2D::Texture2D(int t_w, int t_h) {
+        generate(t_w, t_h);
+    }
+
+    Texture2D::Texture2D(Texture2D &&t_tex)
+    {
+        m_id = t_tex.m_id;
+        m_width = t_tex.m_width;
+        m_height = t_tex.m_height;
+
+        t_tex.m_id = 0;
+        t_tex.m_width = 0;
+        t_tex.m_height = 0;
+    }
+
+    Texture2D::~Texture2D() {
+        release();
+    }
+
+    Texture2D& Texture2D::operator=(Texture2D&& t_r) {
+        if(this != &t_r)
+        {
+            release();
+            m_id = t_r.m_id;
+            m_width = t_r.m_width;
+            m_height = t_r.m_height;
+
+            t_r.m_id = 0;
+        }
+        return *this;
+    }
+
+    void Texture2D::generate(int t_w, int t_h){
+        release();
+
         m_width = t_w;
         m_height = t_h;
 
-        glGenTextures(1, &m_id);
-        glBindTexture(GL_TEXTURE_2D, m_id);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, t_w, t_h, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
-    }
-
-    Texture2D::Texture2D(int t_w, int t_h, Format t_f) {
-        m_width = t_w;
-        m_height = t_h;
-
-        glGenTextures(1, &m_id);
-        glBindTexture(GL_TEXTURE_2D, m_id);
-        glTexImage2D(GL_TEXTURE_2D, 0, t_f, t_w, t_h, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
-
-    }
-
-    void Texture2D::generate(){
-        if(!m_id)
-            return;
-        glGenTextures(1, &m_id);
-        glBindTexture(GL_TEXTURE_2D, m_id);
+        glCreateTextures(GL_TEXTURE_2D, 1, &m_id);
+        glTextureStorage2D(m_id, 1, GL_RGBA8, t_w, t_h);
+        glTextureParameteri(m_id, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTextureParameteri(m_id, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     }
 
     void Texture2D::setData(int t_x, int t_y, int t_w, int t_h, Format t_f, void *data) {
         if (!m_id)
-            return;
+            generate(t_w + t_x, t_h + t_y);
         glTextureSubImage2D(m_id, 0, t_x, t_y, t_w, t_h, t_f, GL_UNSIGNED_BYTE, data);
     }
-
-    void Texture2D::setFiltering(Filtering t_fil) {
-        glBindTexture(GL_TEXTURE_2D, m_id);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, t_fil);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, t_fil);
-    }
-
 
     Texture2D Texture2D::_loadBMP(std::string t_path) {
         std::ifstream file(t_path, std::ios::binary);
         if (!file.is_open()) {
-            std::cout << "asdas";
+            std::cout << "asd" << std::endl;
+            return Texture2D();
         }
 
         char info[54];
@@ -86,8 +93,14 @@ namespace Iru {
 
         file.read((char*)img.data, size);
 
-        Texture2D tex(img, BGR);
+        Texture2D tex(img);
 
         return tex;
+    }
+
+    void Texture2D::release() {
+        if(m_id)
+            glDeleteTextures(1, &m_id);
+        m_id = 0;
     }
 }

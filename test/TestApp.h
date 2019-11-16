@@ -8,26 +8,21 @@
 #include "irulan.h"
 #include "irulan_e.h"
 
-class TestApp : public Iru::App{
-
+class TestApp : public Iru::App {
 protected:
     void init() override;
 
 private:
     void draw(double) override;
-
     void step(double) override;
 
-    Iru::VertexBuffer* vbo;
-    Iru::VertexArray* vao;
-    Iru::Shader* shd;
+    Iru::VertexBuffer *vbo;
+    Iru::VertexArray *vao;
+    Iru::Shader *shd;
 
-    Iru::VertexBuffer* vbo2;
-    Iru::VertexArray* vao2;
-    Iru::Shader* shd2;
-
-
-    unsigned int vv;
+    Iru::VertexBuffer *vbo2;
+    Iru::VertexArray *vao2;
+    Iru::Shader *shd2;
 
     Iru::Matrix Proj;
     Iru::Matrix View;
@@ -41,7 +36,6 @@ private:
     IruE::BitmapFont font;
     IruE::Text text;
 };
-
 
 
 #endif //IRULAN_TESTAPP_H

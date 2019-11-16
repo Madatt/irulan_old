@@ -33,14 +33,15 @@ namespace Iru {
 
         for (int i = 0; i < 16; i++) {
             if (m_texture[i] != nullptr) {
-                glActiveTexture(GL_TEXTURE0 + i);
-                glBindTexture(GL_TEXTURE_2D, m_texture[i]->m_id);
+                glBindTextureUnit(i, m_texture[i]->m_id);
+                //glBindImageTexture(0, m_texture[i]->m_id, 0, false, 0, GL_READ_ONLY, GL_RGBA8);
             }
         }
 
         m_va->use();
         m_shader->use();
-
+        ;
+        glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
         glDrawArrays(t_type, t_s, t_c);
     }
 
@@ -51,6 +52,7 @@ namespace Iru {
         for (int i = 0; i < 16; i++) {
             m_texture[i] = nullptr;
         }
+
     }
 
     void Renderer::setTexture(Texture *t_tex, int t_n) {

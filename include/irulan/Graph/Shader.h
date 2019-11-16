@@ -18,7 +18,12 @@ namespace Iru {
     public:
         Shader();
         Shader(std::string t_ver, std::string t_frag);
+        Shader(const Shader& t_r) = delete;
+        Shader(Shader&& t_r);
         ~Shader();
+
+        Shader& operator=(const Shader& t_r) = delete;
+        Shader& operator=(Shader&& t_r);
 
         void setVertex(std::string t_ver);
         void setFragment(std::string t_frag);
@@ -30,11 +35,12 @@ namespace Iru {
         bool check();
 
     private:
+        void use();
+        void release();
+
         unsigned int m_id = 0;
         unsigned int m_vid = 0;
         unsigned int m_fid = 0;
-
-        void use();
     };
 }
 

@@ -14,17 +14,23 @@ namespace Iru {
         friend class Renderer;
 
     public:
-        VertexArray();
+        VertexArray() = default;
+        VertexArray(const VertexArray& t_r) = delete;
+        VertexArray(VertexArray&& t_r);
         ~VertexArray();
-        void setAttrib(VertexBuffer &t_vb, unsigned int t_i, unsigned int t_size, Type t_type, unsigned int t_stride,
-                       void *t_data);
 
-        void enableAttrib(unsigned int t_i);
+        VertexArray& operator=(const VertexArray& t_r) = delete;
+        VertexArray& operator=(VertexArray&& t_r);
+
+        void bindData(VertexBuffer *t_vb, unsigned int t_i, unsigned int t_start ,unsigned int t_size);
+        void setAttrib(unsigned int t_vi , unsigned int t_i, unsigned int t_count, unsigned int t_off);
 
     private:
-        unsigned int m_id;
+        unsigned int m_id = 0;
 
         void use();
+        void create();
+        void release();
     };
 }
 

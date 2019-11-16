@@ -9,11 +9,18 @@
 
 namespace Iru {
     class VertexBuffer {
+        friend class Renderer;
         friend class VertexArray;
 
     public:
-        VertexBuffer();
+        VertexBuffer() = default;
+        VertexBuffer(const VertexBuffer& t_r) = delete;
+        VertexBuffer(VertexBuffer&& t_r);
         ~VertexBuffer();
+
+        VertexBuffer& operator=(const VertexBuffer& t_r) = delete;
+        VertexBuffer& operator=(VertexBuffer&& t_r);
+
 
         void setData(signed long int t_size, void *t_data);
         template<typename T>
@@ -21,7 +28,10 @@ namespace Iru {
 
     private:
         unsigned int m_id = 0;
+
         void use();
+        void create();
+        void release();
     };
 }
 

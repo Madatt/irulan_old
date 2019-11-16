@@ -8,7 +8,6 @@ namespace Iru {
     }
 
     Texture::~Texture() {
-        if (m_id)
-            glDeleteTextures(0, &m_id);
+
     }
 }
