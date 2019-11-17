@@ -6,7 +6,6 @@
 #define IRULAN_TESTAPP_H
 
 #include "irulan.h"
-#include "irulan_e.h"
 
 class TestApp : public Iru::App {
 protected:
@@ -33,8 +32,8 @@ private:
     Iru::Vector3 frm;
 
     Iru::Texture2D tex;
-    IruE::BitmapFont font;
-    IruE::Text text;
+    Iru::BitmapFont font;
+    Iru::Text text;
 };
 
 

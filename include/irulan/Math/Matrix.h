@@ -12,7 +12,6 @@
 
 namespace Iru {
     class Vector3;
-
     class Matrix {
     public:
         Matrix();
@@ -44,6 +43,8 @@ namespace Iru {
         float m_mat[16];
 
     };
+
+    using Matrix4 = Matrix;
 }
 
 #endif

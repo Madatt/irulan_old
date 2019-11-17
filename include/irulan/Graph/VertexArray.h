@@ -22,7 +22,7 @@ namespace Iru {
         VertexArray& operator=(const VertexArray& t_r) = delete;
         VertexArray& operator=(VertexArray&& t_r);
 
-        void bindData(VertexBuffer *t_vb, unsigned int t_i, unsigned int t_start ,unsigned int t_size);
+        void bindVB(VertexBuffer *t_vb, unsigned int t_i, unsigned int t_start , unsigned int t_size);
         void setAttrib(unsigned int t_vi , unsigned int t_i, unsigned int t_count, unsigned int t_off);
 
     private:

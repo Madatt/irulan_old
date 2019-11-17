@@ -18,4 +18,7 @@
 #include "Graph/Shader.h"
 #include "Graph/Renderer.h"
 
+#include "Graph2D/Text.h"
+#include "Graph2D/BitmapFont.h"
+
 #endif //IRULAN_IRULAN_H

@@ -32,7 +32,7 @@ void TestApp::draw(double t_delta) {
     renderer.setTexture(&tex, 0);
     renderer.setVA(vao);
     renderer.setShader(shd);
-    renderer.drawArrays(Iru::TRIANGLES, 0, 6);
+    renderer.drawInstanced(Iru::TRIANGLES, 0, 6, 200);
     renderer.flush();
 
     Proj = Iru::Matrix();
@@ -42,7 +42,7 @@ void TestApp::draw(double t_delta) {
     renderer.setTexture(&tex, 0);
     renderer.setVA(vao2);
     renderer.setShader(shd2);
-    renderer.drawArrays(Iru::TRIANGLES, 0, 3);
+    renderer.draw(Iru::TRIANGLES, 0, 3);
     renderer.flush();*/
 
 
@@ -64,7 +64,7 @@ void TestApp::init() {
                        "\n"
                        "void main()\n"
                        "{\n"
-                       "    gl_Position = aPos2 * vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+                       "    gl_Position = aPos2 * vec4(aPos.x + gl_InstanceID, aPos.y + gl_InstanceID, aPos.z, 1.0);\n"
                        "    Tex = aTex;\n"
                        "}";
 
@@ -92,7 +92,7 @@ void TestApp::init() {
                        "\n"
                        "void main()\n"
                        "{\n"
-                       "    gl_Position = aPos2 * vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+                       "    gl_Position = aPos2 * vec4(aPos.x + gl_InstanceID*2, aPos.y + gl_InstanceID*2, aPos.z, 1.0);\n"
                        "}";
 
     std::string frags2 = "#version 450 core\n"
@@ -141,15 +141,15 @@ void TestApp::init() {
     vbo2 = new Iru::VertexBuffer();*/
 
     vbo->setData(sizeof(ver), ver);
-    vao->bindData(vbo, 0, 0, 3*sizeof(float));
-    vao->bindData(vbo, 1, 18*sizeof(float), 2*sizeof(float));
+    vao->bindVB(vbo, 0, 0, 3 * sizeof(float));
+    vao->bindVB(vbo, 1, 18 * sizeof(float), 2 * sizeof(float));
     vao->setAttrib(0, 0, 3, 0);
     vao->setAttrib(1, 1, 2, 0);
 
 
     /*vbo2->setData(sizeof(ver2), ver2);
     vao2->bindData(vbo, 0, 0, 2*sizeof(float));
-    vao2->bindData(vbo, 1, 6*sizeof(float), 2*sizeof(float));
+    vao2->bindVB(vbo, 1, 6*sizeof(float), 2*sizeof(float));
     vao2->setAttrib(0, 0, 2, 0);
     vao2->setAttrib(1, 1, 2, 0);*/
 

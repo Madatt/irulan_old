@@ -8,24 +8,24 @@
 #include "Graph/Texture2D.h"
 #include "Misc/Rect.h"
 
-namespace IruE {
+namespace Iru {
     class BitmapFont {
         friend class Text;
 
     public:
-        BitmapFont(Iru::Texture2D& t_tex, int t_r, int t_c);
+        BitmapFont(Texture2D& t_tex, int t_r, int t_c);
         BitmapFont() = default;
         virtual ~BitmapFont() = default;
 
-        void setTexture(Iru::Texture2D& t_tex, int t_r, int t_c);
+        void setTexture(Texture2D& t_tex, int t_r, int t_c);
     private:
         int m_rows = 0;
         int m_columns = 0;
         int m_chars = 0;
         float m_aspect = 0;
-        Iru::Rect m_cell;
+        Rect m_cell;
 
-        Iru::Texture2D* m_tex = nullptr;
+        Texture2D* m_tex = nullptr;
     };
 }
 

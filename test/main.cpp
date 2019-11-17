@@ -1,6 +1,5 @@
 #include <iostream>
 #include "irulan.h"
-#include "irulan_e.h"
 #include "TestApp.h"
 
 int main(int argc, char *argv[]) {

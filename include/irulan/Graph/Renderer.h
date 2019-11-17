@@ -25,7 +25,8 @@ namespace Iru {
         void setShader(Shader *t_sha);
         void setTexture(Texture *t_tex, int t_n);
 
-        void drawArrays(Polygon t_type, int t_s, int t_c);
+        void draw(Polygon t_type, int t_s, int t_c);
+        void drawInstanced(Polygon t_type, int t_s, int t_c, int t_ic);
 
         void flush();
         void clear();

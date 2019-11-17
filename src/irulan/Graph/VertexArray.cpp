@@ -34,7 +34,7 @@ namespace Iru {
         glBindVertexArray(m_id);
     }
 
-    void VertexArray::bindData(VertexBuffer *t_vb, unsigned int t_i ,unsigned int t_start, unsigned int t_size) {
+    void VertexArray::bindVB(VertexBuffer *t_vb, unsigned int t_i , unsigned int t_start, unsigned int t_size) {
         create();
         glVertexArrayVertexBuffer(m_id, t_i, t_vb->m_id, t_start, t_size);
     }

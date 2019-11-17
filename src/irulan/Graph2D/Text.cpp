@@ -4,7 +4,7 @@
 
 #include "Graph2D/Text.h"
 
-namespace IruE {
+namespace Iru {
     Text::Text(BitmapFont &t_font, std::string t_text)
             : m_font(&t_font), m_text(t_text) {
         construct();
@@ -26,6 +26,9 @@ namespace IruE {
         int c = 0;
         for(char a : m_text)
         {
+            /*m_vers.emplace_back(Vector3(0 + c*w, 0, 0), Vector3(0 + x * float(a) + x, 1 - y * float(a), 0));
+            m_vers.emplace_back(Vector3(0 + c*w, 0, 0), Vector3(0 + x * float(a) + x, 1 - y * float(a), 0));
+            m_vers.emplace_back(Vector3(0 + c*w, 0, 0), Vector3(0 + x * float(a) + x, 1 - y * float(a), 0));
             m_vers.push_back(0 + c * w);
             m_vers.push_back(0);
 
@@ -48,7 +51,7 @@ namespace IruE {
             m_vers.push_back(0 + x * float(a));
             m_vers.push_back(1 - y * float(a) - y);
 
-            c++;
+            c++;*/
         }
     }
 }

@@ -24,6 +24,10 @@ set(SOURCES
         src/irulan/Graph/Shader.cpp
         src/irulan/Graph/Texture.cpp
         src/irulan/Graph/Texture2D.cpp
+        src/irulan/Graph/Primitives/VertexT.cpp
+
+        src/irulan/Graph2D/BitmapFont.cpp
+        src/irulan/Graph2D/Text.cpp
 
         src/irulan/Misc/Timer.cpp
 
@@ -31,9 +35,6 @@ set(SOURCES
         src/irulan/App.cpp
 
 
-        src/irulan_e/Graph2D/Text.cpp
-        src/irulan_e/Graph2D/BitmapFont.cpp
-        src/irulan_e/Graph2D/Sprite.cpp
         )
 
 include_directories(${INCLUDES})
