@@ -4,8 +4,13 @@
 
 #include "TestApp.h"
 
-void TestApp::draw(double t_delta) {
-    renderer.clear();
+TestApp::TestApp()
+:App(1280, 720){
+
+}
+
+void TestApp::draw(double t_delta){
+    clear();
 
 
     Iru::Quaternion quat =
@@ -29,11 +34,11 @@ void TestApp::draw(double t_delta) {
 
     shd->setMatrix("aPos2", Proj);
     shd->setInt("atexture", 0);
-    renderer.setTexture(&tex, 0);
-    renderer.setVA(vao);
-    renderer.setShader(shd);
-    renderer.drawInstanced(Iru::TRIANGLES, 0, 6, 200);
-    renderer.flush();
+    setTexture(&tex, 0);
+    setVA(vao);
+    setShader(shd);
+    drawInstanced(Iru::TRIANGLES, 0, 6, 200);
+    flush();
 
     Proj = Iru::Matrix();
 
@@ -103,8 +108,6 @@ void TestApp::init() {
                         "    FragColor = vec4(1, 1, 1,1)*imageLoad(image, ivec4(gl_FragCoord).xy);\n"
                         "} ";
 
-
-    setDimensions(1280, 720);
 
     App::init();
 

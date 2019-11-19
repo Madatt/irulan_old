@@ -35,6 +35,7 @@ namespace Iru {
 
         static Matrix getIdentity();
         static Matrix createPerspective(float t_fov, float t_asp, float t_n, float t_f);
+        static Matrix createOrtho(int t_w, int t_h, float t_n, float t_f);
         static Matrix createLookAt(Vector3 t_ori, Vector3 t_tar, Vector3 t_up);
         static Matrix createRotation(Vector3 t_axis, float t_angle);
         static Matrix createTranslation(Vector3 t_vec);

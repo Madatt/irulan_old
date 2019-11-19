@@ -38,7 +38,7 @@ namespace Iru {
 
 
     Matrix &Matrix::operator=(const Matrix &t_r) {
-        for(int i = 0; i < 16; i++)
+        for (int i = 0; i < 16; i++)
             m_mat[i] = t_r.m_mat[i];
 
         return *this;
@@ -123,6 +123,18 @@ namespace Iru {
                         0, 0, (t_f + t_n) / nf, -1,
                         0, 0, 2 * t_f * t_n / nf, 0,
                 });
+    }
+
+    Matrix Matrix::createOrtho(int t_w, int t_h, float t_n, float t_f) {
+        float w = t_w - 1.f;
+        float h = t_h - 1.f;
+
+        return Matrix({
+                              2.f / w, 0, 0, 0,
+                              0, -2 / w, 0, 0,
+                              0, 0, 2.f / (t_n - t_f), 0,
+                              -1, 1, (t_n + t_f) / (t_n - t_f), 1,
+                      });
     }
 
     Matrix Matrix::createLookAt(Vector3 t_ori, Vector3 t_tar, Vector3 t_up) {

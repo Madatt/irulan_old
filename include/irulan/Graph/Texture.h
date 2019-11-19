@@ -14,7 +14,7 @@ namespace Iru {
 
 
     class Texture {
-        friend class Renderer;
+        friend class RenderTarget;
 
     public:
         virtual ~Texture();
@@ -25,9 +25,9 @@ namespace Iru {
     protected:
         Texture();
 
+        unsigned int m_id = 0;
         int m_width = 0;
         int m_height = 0;
-        unsigned int m_id = 0;
     };
 }
 #endif //RSMOL_TEXTURE_H

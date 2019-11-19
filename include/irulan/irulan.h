@@ -16,9 +16,9 @@
 #include "Graph/Texture.h"
 #include "Graph/Texture2D.h"
 #include "Graph/Shader.h"
-#include "Graph/Renderer.h"
+#include "Graph/Render/RenderTarget.h"
 
-#include "Graph2D/Text.h"
-#include "Graph2D/BitmapFont.h"
+#include "Graph2D/Font/Text.h"
+#include "Graph2D/Font/BitmapFont.h"
 
 #endif //IRULAN_IRULAN_H

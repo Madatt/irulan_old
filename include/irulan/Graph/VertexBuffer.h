@@ -9,7 +9,7 @@
 
 namespace Iru {
     class VertexBuffer {
-        friend class Renderer;
+        friend class RenderTarget;
         friend class VertexArray;
 
     public:

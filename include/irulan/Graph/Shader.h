@@ -13,7 +13,7 @@ namespace Iru {
     class Matrix;
 
     class Shader {
-        friend class Renderer;
+        friend class RenderTarget;
 
     public:
         Shader();

@@ -2,7 +2,7 @@
 // Created by Madatt on 12.11.2019.
 //
 
-#include "Graph2D/Text.h"
+#include "Graph2D/Font/Text.h"
 
 namespace Iru {
     Text::Text(BitmapFont &t_font, std::string t_text)
@@ -53,5 +53,10 @@ namespace Iru {
 
             c++;*/
         }
+    }
+
+
+    void Text::draw(RenderTarget &t_ren) const {
+
     }
 }

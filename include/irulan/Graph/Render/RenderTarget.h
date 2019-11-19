@@ -1,25 +1,27 @@
 //
-// Created by Dawid on 05.09.2019.
+// Created by Madatt on 18.11.2019.
 //
 
-#ifndef RSMOL_RENDERER_H
-#define RSMOL_RENDERER_H
+#ifndef IRULAN_RENDERTARGET_H
+#define IRULAN_RENDERTARGET_H
 
-#include <string>
-#include "Defines.h"
+#include "irulan/Misc/Rect.h"
+#include "irulan/Defines.h"
+#include "Math/Matrix.h"
 
-namespace Iru {
-    class Game;
+
+namespace Iru{
     class VertexArray;
     class VertexBuffer;
     class Shader;
     class Texture;
+    class Drawable;
 
-
-    class Renderer {
+    class RenderTarget {
     public:
-        Renderer();
-        ~Renderer() = default;
+        RenderTarget();
+        ~RenderTarget() = default;
+
 
         void setVA(VertexArray *t_va);
         void setShader(Shader *t_sha);
@@ -27,13 +29,22 @@ namespace Iru {
 
         void draw(Polygon t_type, int t_s, int t_c);
         void drawInstanced(Polygon t_type, int t_s, int t_c, int t_ic);
+        void draw(Drawable& t_ob);
 
         void flush();
         void clear();
+
+        virtual void init() = 0;
+        virtual void use() = 0;
+
     private:
         VertexArray *m_va = nullptr;
         Shader *m_shader = nullptr;
         Texture *m_texture[16]{};
+
     };
 }
-#endif //RSMOL_RENDERER_H
+
+
+
+#endif //IRULAN_RENDERTARGET_H

@@ -8,10 +8,11 @@
 #include "irulan.h"
 
 class TestApp : public Iru::App {
-protected:
-    void init() override;
+public:
+    TestApp();
 
 private:
+    void init() override;
     void draw(double) override;
     void step(double) override;
 

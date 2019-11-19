@@ -2,7 +2,7 @@
 // Created by Madatt on 12.11.2019.
 //
 
-#include "Graph2D/BitmapFont.h"
+#include "Graph2D/Font/BitmapFont.h"
 
 namespace Iru {
     BitmapFont::BitmapFont(Texture2D &t_tex, int t_r, int t_c) {

@@ -9,9 +9,8 @@
 
 
 namespace Iru {
-    App::App()
-            : renderer() {
-
+    App::App(int t_w, int t_h)
+    :m_width(t_w), m_height(t_h) {
     }
 
     void App::init() {
@@ -92,11 +91,6 @@ namespace Iru {
         }
     }
 
-    void App::setDimensions(int t_w, int t_h) {
-        m_width = t_w;
-        m_height = t_h;
-    }
-
     void App::flip() {
         SDL_GL_SwapWindow(m_window);
     }
@@ -125,5 +119,9 @@ namespace Iru {
 
     bool App::check() {
         return m_init;
+    }
+
+    void App::use() {
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 }

@@ -11,7 +11,7 @@ namespace Iru {
     class VertexBuffer;
 
     class VertexArray {
-        friend class Renderer;
+        friend class RenderTarget;
 
     public:
         VertexArray() = default;

@@ -6,7 +6,7 @@
 #define RSMOL_GAME_H
 
 #include "SDL2/SDL.h"
-#include "Graph/Renderer.h"
+#include "Graph/Render/RenderTarget.h"
 
 namespace Iru {
     class Renderer;
@@ -17,11 +17,9 @@ namespace Iru {
         unsigned int time = 0;
     };
 
-    class App {
+    class App : public RenderTarget {
     public:
-        Renderer renderer;
-
-        App();
+        App(int t_w, int t_h);
         virtual ~App() = default;
 
         int run();
@@ -53,9 +51,11 @@ namespace Iru {
         virtual void init();
         virtual void draw(double t_dt) = 0;
         virtual void step(double t_dt) = 0;
-        void setDimensions(int t_w, int t_h);
+        void use();
+        Rect getDimensions(){ return Rect(0, 0, m_width, m_height);};
         void flip();
     };
+
 }
 
 

@@ -11,7 +11,7 @@
 
 namespace Iru {
     class Texture2D : public Texture {
-        friend class Renderer;
+        friend class RenderTarget;
 
     public:
         Texture2D() = default;
