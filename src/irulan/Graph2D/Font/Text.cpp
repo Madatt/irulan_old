@@ -3,60 +3,52 @@
 //
 
 #include "Graph2D/Font/Text.h"
+#include "App.h"
+#include <string>
+#include <iostream>
 
 namespace Iru {
-    Text::Text(BitmapFont &t_font, std::string t_text)
+    Text::Text(const BitmapFont &t_font, std::string t_text)
             : m_font(&t_font), m_text(t_text) {
+        m_quads.setTexture(*t_font.m_tex);
         construct();
     }
 
-    Text::Text(BitmapFont &t_font)
+    Text::Text(const BitmapFont &t_font)
             : m_font(&t_font) {
-
+        m_quads.setTexture(*t_font.m_tex);
     }
 
     void Text::construct() {
-        m_vers.clear();
+        m_quads.clear();
 
         float x = m_font->m_cell.w;
         float y = m_font->m_cell.h;
-        float w = 1;
-        float h = m_font->m_aspect;
+        float w = m_font->m_cell.x;
+        float h = m_font->m_cell.y;
+        int xx = 0;
+        int yy = 0;
+        float c = 0;
 
-        int c = 0;
-        for(char a : m_text)
-        {
-            /*m_vers.emplace_back(Vector3(0 + c*w, 0, 0), Vector3(0 + x * float(a) + x, 1 - y * float(a), 0));
-            m_vers.emplace_back(Vector3(0 + c*w, 0, 0), Vector3(0 + x * float(a) + x, 1 - y * float(a), 0));
-            m_vers.emplace_back(Vector3(0 + c*w, 0, 0), Vector3(0 + x * float(a) + x, 1 - y * float(a), 0));
-            m_vers.push_back(0 + c * w);
-            m_vers.push_back(0);
+        for (char a : m_text) {
+            a -= 32;
+            yy = ((int)a / m_font->m_columns) + 1;
+            xx = ((int)a % m_font->m_columns) ;
 
-            m_vers.push_back(1 + c * w);
-            m_vers.push_back(0);
+            std::cout << xx << " " << yy << std::endl;
 
-            m_vers.push_back(1 + c * w);
-            m_vers.push_back(h);
-
-            m_vers.push_back(0 + c * w);
-            m_vers.push_back(h);
-
-
-            m_vers.push_back(0 + x * float(a) + x);
-            m_vers.push_back(1 - y * float(a));
-
-            m_vers.push_back(0 + x * float(a) + x);
-            m_vers.push_back(1 - y * float(a) - y);
-
-            m_vers.push_back(0 + x * float(a));
-            m_vers.push_back(1 - y * float(a) - y);
-
-            c++;*/
+            m_quads.add(
+                    Rect(w * c, 0, w, h),
+                    //Rect( (float) xx * x, (float) (m_font->m_rows - yy - 1) * y, x, y)
+                    Rect(3*x, -y, x, y)
+                    );
+            c++;
         }
+
     }
 
 
-    void Text::draw(RenderTarget &t_ren) const {
-
+    void Text::draw(RenderTarget &t_ren) {
+        m_quads.draw(t_ren);
     }
 }

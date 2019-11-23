@@ -5,13 +5,18 @@
 #include "App.h"
 #include "glad.h"
 #include "gl_debug.h"
+#include "Shaders.h"
+
 #include <iostream>
 
 
+
 namespace Iru {
-    App::App(int t_w, int t_h)
-    :m_width(t_w), m_height(t_h) {
+    App::App(const Vector2i &t_viewport)
+    :RenderTarget(t_viewport){
+
     }
+
 
     void App::init() {
         if (m_init)
@@ -21,7 +26,7 @@ namespace Iru {
 
         m_window = SDL_CreateWindow("Smol",
                                     SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                    m_width, m_height,
+                                    getViewport().x, getViewport().y,
                                     SDL_WINDOW_OPENGL);
 
         SDL_GL_SetAttribute(
@@ -47,7 +52,7 @@ namespace Iru {
         );
 
 
-        glViewport(0, 0, m_width, m_height);
+        glViewport(0, 0, getViewport().x, getViewport().y);
         m_init = true;
     }
 

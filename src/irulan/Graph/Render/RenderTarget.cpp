@@ -10,25 +10,25 @@
 #include "Graph/Render/RenderTarget.h"
 #include "Graph/Render/Drawable.h"
 
-namespace Iru{
-    RenderTarget::RenderTarget() {
+namespace Iru {
+    RenderTarget::RenderTarget(const Vector2i &t_viewport)
+            : m_viewport(t_viewport), m_ort(Matrix::createOrtho(t_viewport.x, t_viewport.y, 1.f, -1.f)) {
 
     }
 
-
-    void RenderTarget::setVA(VertexArray *t_va) {
-        m_va = t_va;
+    void RenderTarget::setVA(const VertexArray &t_va) {
+        m_va = &t_va;
     }
 
-    void RenderTarget::setShader(Shader *t_sha) {
-        m_shader = t_sha;
+    void RenderTarget::setShader(const Shader &t_sha) {
+        m_shader = &t_sha;
     }
 
-    void RenderTarget::setTexture(Texture *t_tex, int t_n) {
-        m_texture[t_n] = t_tex;
+    void RenderTarget::setTexture(const Texture &t_tex, int t_n) {
+        m_texture[t_n] = &t_tex;
     }
 
-    void RenderTarget::draw(Polygon t_type, int t_s, int t_c) {
+    void RenderTarget::render(Polygon t_type, int t_s, int t_c) {
         use();
 
         if (m_shader == nullptr || m_va == nullptr)
@@ -40,12 +40,12 @@ namespace Iru{
             }
         }
 
-        m_va->use();
-        m_shader->use();
+        glBindVertexArray(m_va->m_id);
+        glUseProgram(m_shader->m_id);
         glDrawArrays(t_type, t_s, t_c);
     }
 
-    void RenderTarget::drawInstanced(Polygon t_type, int t_s, int t_c, int t_ic) {
+    void RenderTarget::renderIndexed(Polygon t_type, int t_c, unsigned int t_offset) {
         use();
 
         if (m_shader == nullptr || m_va == nullptr)
@@ -54,17 +54,33 @@ namespace Iru{
         for (int i = 0; i < 16; i++) {
             if (m_texture[i] != nullptr) {
                 glBindTextureUnit(i, m_texture[i]->m_id);
-                //glBindImageTexture(0, m_texture[i]->m_id, 0, false, 0, GL_READ_ONLY, GL_RGBA8);
             }
         }
 
-        m_va->use();
-        m_shader->use();
+        glBindVertexArray(m_va->m_id);
+        glUseProgram(m_shader->m_id);
+        glDrawElements(t_type, t_c, GL_UNSIGNED_BYTE, (void *) t_offset);
+    }
 
+    void RenderTarget::renderInstanced(Polygon t_type, int t_s, int t_c, int t_ic) {
+        use();
+
+        if (m_shader == nullptr || m_va == nullptr)
+            return;
+
+        for (int i = 0; i < 16; i++) {
+            if (m_texture[i] != nullptr) {
+                glBindTextureUnit(i, m_texture[i]->m_id);
+            }
+        }
+
+
+        glBindVertexArray(m_va->m_id);
+        glUseProgram(m_shader->m_id);
         glDrawArraysInstanced(t_type, t_s, t_c, t_ic);
     }
 
-    void RenderTarget::draw(Drawable &t_ob) {
+    void RenderTarget::render(Drawable &t_ob) {
         t_ob.draw(*this);
     }
 

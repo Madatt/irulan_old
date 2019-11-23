@@ -25,19 +25,19 @@ namespace Iru {
         }
         return *this;
     }
-    void VertexBuffer::use() {
-        glBindBuffer(GL_ARRAY_BUFFER, m_id);
+
+    void VertexBuffer::setData(unsigned int t_size, void *t_data) {
+        create();
+        glNamedBufferData(m_id, t_size, t_data, GL_DYNAMIC_DRAW);
     }
 
-    void VertexBuffer::setData(signed long int t_size, void *t_data) {
+    void VertexBuffer::setStorage(unsigned int t_size, void *t_data) {
         create();
-        glNamedBufferData(m_id, t_size, t_data, GL_STATIC_DRAW);
+        glNamedBufferStorage(m_id, t_size, t_data, GL_DYNAMIC_STORAGE_BIT);
     }
 
-    template<typename T>
-    void VertexBuffer::setData(std::vector<T> t_data) {
-        create();
-        glNamedBufferData(m_id, sizeof(T) * t_data.size(), t_data.data(), GL_STATIC_DRAW);
+    void VertexBuffer::setSubData(unsigned int t_offset, unsigned int t_size, void *t_data) {
+        glNamedBufferSubData(m_id, t_offset, t_size, t_data);
     }
 
     void VertexBuffer::create() {

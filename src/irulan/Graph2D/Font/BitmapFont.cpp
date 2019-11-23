@@ -5,19 +5,21 @@
 #include "Graph2D/Font/BitmapFont.h"
 
 namespace Iru {
-    BitmapFont::BitmapFont(Texture2D &t_tex, int t_r, int t_c) {
-        setTexture(t_tex, t_r, t_c);
+    BitmapFont::BitmapFont(Texture2D &t_tex, int t_r, int t_c, int t_w, int t_h) {
+        setTexture(t_tex, t_r, t_c, t_w, t_h);
     }
 
-    void BitmapFont::setTexture(Texture2D &t_tex, int t_r, int t_c) {
+    void BitmapFont::setTexture(Texture2D &t_tex, int t_r, int t_c, int t_w, int t_h) {
         m_tex = &t_tex;
         m_rows = t_r;
         m_columns = t_c;
 
         m_chars = m_rows * m_columns;
-        float x = (float) t_tex.getWidth() / (float) t_c;
-        float y = (float) t_tex.getHeight() / (float) t_r;
-        m_aspect = y / x;
-        m_cell = Rect(0, 0, x, y);
+        float x = (float) t_w / (float) t_tex.getWidth();
+        float y = (float) t_h / (float) t_tex.getHeight();
+        m_aspect = (float) t_h / (float) t_w;
+        m_cell = Rect(t_w, t_h, x, y);
     }
+
+
 }

@@ -7,6 +7,7 @@
 
 #include "irulan/Misc/Rect.h"
 #include "irulan/Defines.h"
+#include "Math/Vector2.h"
 #include "Math/Matrix.h"
 
 
@@ -19,28 +20,35 @@ namespace Iru{
 
     class RenderTarget {
     public:
-        RenderTarget();
+        RenderTarget(const Vector2i &t_viewport);
         ~RenderTarget() = default;
 
 
-        void setVA(VertexArray *t_va);
-        void setShader(Shader *t_sha);
-        void setTexture(Texture *t_tex, int t_n);
+        void setVA(const VertexArray &t_va);
+        void setShader(const Shader &t_sha);
+        void setTexture(const Texture &t_tex, int t_n);
 
-        void draw(Polygon t_type, int t_s, int t_c);
-        void drawInstanced(Polygon t_type, int t_s, int t_c, int t_ic);
-        void draw(Drawable& t_ob);
+        void render(Polygon t_type, int t_s, int t_c);
+        void renderIndexed(Polygon t_type, int t_c, unsigned int t_offset);
+        void renderInstanced(Polygon t_type, int t_s, int t_c, int t_ic);
+        void render(Drawable& t_ob);
 
         void flush();
         void clear();
+
+        Vector2i getViewport(){ return m_viewport;};
+        Matrix getOrt(){ return m_ort;};
 
         virtual void init() = 0;
         virtual void use() = 0;
 
     private:
-        VertexArray *m_va = nullptr;
-        Shader *m_shader = nullptr;
-        Texture *m_texture[16]{};
+        const VertexArray *m_va = nullptr;
+        const Shader *m_shader = nullptr;
+        const Texture *m_texture[16]{};
+
+        Vector2i m_viewport;
+        Matrix4 m_ort;
 
     };
 }

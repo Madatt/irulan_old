@@ -28,9 +28,9 @@ private:
     Iru::Matrix View;
     float test = 3;
 
-    Iru::Vector3 dir;
-    Iru::Vector3 forw;
-    Iru::Vector3 frm;
+    Iru::Vector3f dir;
+    Iru::Vector3f forw;
+    Iru::Vector3f frm;
 
     Iru::Texture2D tex;
     Iru::BitmapFont font;

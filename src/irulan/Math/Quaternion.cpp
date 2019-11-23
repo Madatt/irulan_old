@@ -4,7 +4,7 @@
 
 #include <cmath>
 #include "Math/Quaternion.h"
-#include "Math/Vector3.h"
+
 #include "Math/Matrix.h"
 
 namespace Iru {
@@ -69,7 +69,7 @@ namespace Iru {
         return (*this = *this - t_r);
     }
 
-    Quaternion Quaternion::normalize() {
+    Quaternion Quaternion::normalize() const{
         Quaternion quat;
 
         float n = sqrt(x * x + y * y + z * z + w * w);
@@ -94,38 +94,38 @@ namespace Iru {
         return quat;
     }
 
-    Matrix Quaternion::toMatrix() {
+    Matrix Quaternion::toMatrix() const{
         Matrix mat;
-        *this = this->normalize();
+        Quaternion cop = this->normalize();
 
-        float xx = x * x;
-        float yy = y * y;
-        float zz = z * z;
+        float xx = cop.x * cop.x;
+        float yy = cop.y * cop.y;
+        float zz = cop.z * cop.z;
 
         mat[0] = 1 - 2 * yy - 2 * zz;
-        mat[1] = 2 * x * y + 2 * z * w;
-        mat[2] = 2 * x * z - 2 * y * w;
+        mat[1] = 2 * cop.x * cop.y + 2 * cop.z * cop.w;
+        mat[2] = 2 * cop.x * cop.z - 2 * cop.y * cop.w;
 
-        mat[4] = 2 * x * y - 2 * z * w;
+        mat[4] = 2 * cop.x * cop.y - 2 * cop.z * cop.w;
         mat[5] = 1 - 2 * xx - 2 * zz;
-        mat[6] = 2 * y * z + 2 * x * w;
+        mat[6] = 2 * cop.y * cop.z + 2 * cop.x * cop.w;
 
-        mat[8] = 2 * x * z + 2 * y * w;
-        mat[9] = 2 * y * z - 2 * x * w;
+        mat[8] = 2 * cop.x * cop.z + 2 * cop.y * cop.w;
+        mat[9] = 2 * cop.y * cop.z - 2 * cop.x * cop.w;
         mat[10] = 1 - 2 * xx - 2 * yy;
 
         return mat;
     }
 
-    Quaternion Quaternion::createRotation(Vector3 t_axis, float t_angle) {
-        t_axis = t_axis.normalize();
+    Quaternion Quaternion::createRotation(const Vector3f &t_axis, float t_angle) {
+        Vector3f ta = t_axis.normalize();
         float a = M_PI / 180.f * t_angle;
 
         Quaternion quat;
 
-        quat.x = std::sin(a / 2) * t_axis.x;
-        quat.y = std::sin(a / 2) * t_axis.y;
-        quat.z = std::sin(a / 2) * t_axis.z;
+        quat.x = std::sin(a / 2) * ta.x;
+        quat.y = std::sin(a / 2) * ta.y;
+        quat.z = std::sin(a / 2) * ta.z;
         quat.w = std::cos(a / 2);
 
         return quat;

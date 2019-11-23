@@ -12,6 +12,7 @@ namespace Iru {
     enum Type {
         FLOAT = GL_FLOAT,
         DOUBLE = GL_DOUBLE,
+        U_BYTE = GL_UNSIGNED_BYTE,
     };
 
     enum Polygon {

@@ -18,11 +18,7 @@ namespace Iru {
         friend class Renderer;
 
     public:
-        virtual void draw(RenderTarget &t_ren) const = 0;
-
-        Quaternion rotation;
-        Matrix position;
-        Matrix scale;
+        virtual void draw(RenderTarget &t_ren) = 0;
     };
 }
 

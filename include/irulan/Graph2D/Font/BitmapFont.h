@@ -13,11 +13,11 @@ namespace Iru {
         friend class Text;
 
     public:
-        BitmapFont(Texture2D& t_tex, int t_r, int t_c);
+        BitmapFont(Texture2D& t_tex, int t_r, int t_c, int  t_w, int t_h);
         BitmapFont() = default;
         virtual ~BitmapFont() = default;
 
-        void setTexture(Texture2D& t_tex, int t_r, int t_c);
+        void setTexture(Texture2D& t_tex, int t_r, int t_c, int  t_w, int t_h);
     private:
         int m_rows = 0;
         int m_columns = 0;

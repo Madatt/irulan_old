@@ -2,11 +2,10 @@
 // Created by Dawid on 18.08.2019.
 //
 
-#include <math.h>
+#include <cmath>
 #include <iostream>
-#include <cstring>
 #include "Math/Matrix.h"
-#include "Math/Vector3.h"
+
 
 namespace Iru {
 
@@ -36,7 +35,6 @@ namespace Iru {
         return m_mat[t_i];
     }
 
-
     Matrix &Matrix::operator=(const Matrix &t_r) {
         for (int i = 0; i < 16; i++)
             m_mat[i] = t_r.m_mat[i];
@@ -44,7 +42,7 @@ namespace Iru {
         return *this;
     }
 
-    Matrix Matrix::operator*(const Matrix &t_r) {
+    Matrix Matrix::operator*(const Matrix &t_r) const {
         Matrix mat;
 
         for (int x = 0; x < 4; x++) {
@@ -63,7 +61,7 @@ namespace Iru {
         return (*this = *this * t_r);
     }
 
-    Matrix Matrix::operator+(const Matrix &t_r) {
+    Matrix Matrix::operator+(const Matrix &t_r) const {
         Matrix mat;
 
         for (int x = 0; x < 4; x++) {
@@ -78,7 +76,7 @@ namespace Iru {
         return (*this = *this + t_r);
     }
 
-    Matrix Matrix::operator-(const Matrix &t_r) {
+    Matrix Matrix::operator-(const Matrix &t_r) const {
         Matrix mat;
 
         for (int x = 0; x < 4; x++) {
@@ -137,7 +135,7 @@ namespace Iru {
                       });
     }
 
-    Matrix Matrix::createLookAt(Vector3 t_ori, Vector3 t_tar, Vector3 t_up) {
+    Matrix Matrix::createLookAt(const Vector3f &t_ori, const Vector3f &t_tar, const Vector3f &t_up) {
         Vector3 forw = t_ori - t_tar;
         forw = forw.normalize();
 
@@ -165,11 +163,11 @@ namespace Iru {
         return mat;
     }
 
-    Matrix Matrix::createRotation(Vector3 t_axis, float t_angle) {
-        t_axis = t_axis.normalize();
-        float x = t_axis.x;
-        float y = t_axis.y;
-        float z = t_axis.z;
+    Matrix Matrix::createRotation(const Vector3f &t_axis, float t_angle) {
+        Vector3 ax = t_axis.normalize();
+        float x = ax.x;
+        float y = ax.y;
+        float z = ax.z;
 
         float a = M_PI / 180.f * t_angle;
         float c = cos(a);
@@ -201,7 +199,7 @@ namespace Iru {
         return mat;
     }
 
-    Matrix Matrix::createTranslation(Vector3 t_vec) {
+    Matrix Matrix::createTranslation(const Vector3f &t_vec) {
         Matrix mat;
 
         mat[12] = t_vec.x;
@@ -214,6 +212,25 @@ namespace Iru {
 
     float *Matrix::getPtr() {
         return m_mat;
+    }
+
+    Matrix Matrix::createScale(const Vector3f &t_vec) {
+        return Matrix({
+                              t_vec.x, 0, 0, 0,
+                              0, t_vec.y, 0, 0,
+                              0, 0, t_vec.z, 0,
+                              0, 0, 0, 1,
+                      });
+    }
+
+    Vector3f Matrix::apply(const Vector3f &t_vec) const {
+        Vector3f vec;
+
+        vec.x = t_vec.x * (*this)[0] + t_vec.y * (*this)[4] + t_vec.z * (*this)[8] + (*this)[12];
+        vec.y = t_vec.x * (*this)[1] + t_vec.y * (*this)[5] + t_vec.z * (*this)[9] + (*this)[13];
+        vec.z = t_vec.x * (*this)[2] + t_vec.y * (*this)[6] + t_vec.z * (*this)[10] + (*this)[14];
+
+        return vec;
     }
 
 }

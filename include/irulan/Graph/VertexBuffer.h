@@ -5,6 +5,7 @@
 #ifndef RSMOL_VERTEXBUFFER_H
 #define RSMOL_VERTEXBUFFER_H
 
+#include "glad/glad.h"
 #include <vector>
 
 namespace Iru {
@@ -22,17 +23,17 @@ namespace Iru {
         VertexBuffer& operator=(VertexBuffer&& t_r);
 
 
-        void setData(signed long int t_size, void *t_data);
-        template<typename T>
-        void setData(std::vector<T> t_data);
+        void setData(unsigned int t_size, void *t_data);
+        void setSubData(unsigned int t_offset ,unsigned int t_size, void *t_data);
+        void setStorage(unsigned int t_size, void *t_data);
 
     private:
         unsigned int m_id = 0;
 
-        void use();
         void create();
         void release();
     };
+
 }
 
 #endif //RSMOL_VERTEXBUFFER_H

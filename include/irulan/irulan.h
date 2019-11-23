@@ -9,6 +9,7 @@
 
 #include "Math/Matrix.h"
 #include "Math/Vector3.h"
+#include "Math/Vector2.h"
 #include "Math/Quaternion.h"
 
 #include "Graph/VertexBuffer.h"

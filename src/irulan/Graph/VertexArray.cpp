@@ -29,17 +29,17 @@ namespace Iru {
         return *this;
     }
 
-
-    void VertexArray::use() {
-        glBindVertexArray(m_id);
-    }
-
-    void VertexArray::bindVB(VertexBuffer *t_vb, unsigned int t_i , unsigned int t_start, unsigned int t_size) {
+    void VertexArray::attachVB(const VertexBuffer &t_vb, unsigned int t_i , unsigned int t_start, unsigned int t_stride){
         create();
-        glVertexArrayVertexBuffer(m_id, t_i, t_vb->m_id, t_start, t_size);
+        glVertexArrayVertexBuffer(m_id, t_i, t_vb.m_id, t_start, t_stride);
     }
 
-    void VertexArray::setAttrib(unsigned int t_vi , unsigned int t_i, unsigned int t_count, unsigned int t_off) {
+    void VertexArray::attachIB(const VertexBuffer &t_vb){
+        create();
+        glVertexArrayElementBuffer(m_id, t_vb.m_id);
+    }
+
+    void VertexArray::setAttrib(unsigned int t_vi , unsigned int t_i, unsigned int t_count, unsigned int t_off) const{
         glBindVertexArray(m_id);
 
         glEnableVertexArrayAttrib(m_id, t_i);

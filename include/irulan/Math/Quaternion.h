@@ -4,10 +4,10 @@
 
 #ifndef RSMOL_QUATERNION_H
 #define RSMOL_QUATERNION_H
+#include "Math/Vector3.h"
 
 namespace Iru {
     class Matrix;
-    class Vector3;
 
     class Quaternion {
     public:
@@ -27,11 +27,11 @@ namespace Iru {
         Quaternion operator-(const Quaternion &t_r);
         Quaternion& operator-=(const Quaternion &t_r);
 
-        Quaternion normalize();
+        Quaternion normalize() const;
         Quaternion conjugate();
-        Matrix toMatrix();
+        Matrix toMatrix() const;
 
-        static Quaternion createRotation(Vector3 t_axis, float t_angle);
+        static Quaternion createRotation(const Vector3f &t_axis, float t_angle) ;
     };
 }
 #endif //RSMOL_QUATERNION_H

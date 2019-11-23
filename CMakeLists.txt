@@ -16,19 +16,18 @@ set(SOURCES
 
         src/irulan/Math/Matrix.cpp
         src/irulan/Math/Quaternion.cpp
-        src/irulan/Math/Vector3.cpp
 
         src/irulan/Graph/VertexArray.cpp
         src/irulan/Graph/VertexBuffer.cpp
         src/irulan/Graph/Shader.cpp
         src/irulan/Graph/Texture.cpp
         src/irulan/Graph/Texture2D.cpp
-        src/irulan/Graph/Primitives/VertexT.cpp
 
         src/irulan/Graph2D/Font/BitmapFont.cpp
         src/irulan/Graph2D/Font/Text.cpp
 
         src/irulan/Graph/Render/RenderTarget.cpp
+        src/irulan/Graph/Render/Quads.cpp
 
         src/irulan/Misc/Timer.cpp
 

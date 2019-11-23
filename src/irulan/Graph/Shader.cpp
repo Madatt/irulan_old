@@ -49,17 +49,12 @@ namespace Iru {
         release();
     }
 
-
-    void Shader::use() {
-        glUseProgram(m_id);
-    }
-
-    void Shader::setMatrix(std::string t_name, Matrix &t_mat) {
+    void Shader::setMatrix(std::string t_name, Matrix t_mat) const{
         if(m_id)
             glProgramUniformMatrix4fv(m_id ,glGetUniformLocation(m_id, t_name.c_str()), 1, false, t_mat.getPtr());
     }
 
-    void Shader::setInt(std::string t_name, int t_val) {
+    void Shader::setInt(std::string t_name, int t_val) const{
         if(m_id)
             glProgramUniform1i(m_id, glGetUniformLocation(m_id, t_name.c_str()), t_val);
     }
@@ -82,7 +77,7 @@ namespace Iru {
         glGetShaderiv(m_vid, GL_COMPILE_STATUS, &succ);
         if (!succ) {
             glGetShaderInfoLog(m_vid, 512, NULL, msg);
-            std::cout << "[Error] Vertex compilation failed: " << msg;
+            std::cout << "[Error] Vertex compilation failed: " << msg << std::endl;
             m_vid = 0;
         }
     }
@@ -101,7 +96,7 @@ namespace Iru {
         glGetShaderiv(m_fid, GL_COMPILE_STATUS, &succ);
         if (!succ) {
             glGetShaderInfoLog(m_fid, 512, NULL, msg);
-            std::cout << "[Error] Fragment compilation failed: " << msg;
+            std::cout << "[Error] Fragment compilation failed: " << msg << std::endl;
             m_fid = 0;
         }
     }
@@ -123,8 +118,8 @@ namespace Iru {
 
         glGetProgramiv(m_id, GL_LINK_STATUS, &succ);
         if (!succ) {
-            glGetShaderInfoLog(m_id, 512, NULL, msg);
-            //log() << "[Error] Shader linking failed: " << msg;
+            glGetProgramInfoLog(m_id, 512, NULL, msg);
+            std::cout << "[Error] Shader linking failed: " << msg << std::endl;
             m_id = 0;
         }
 

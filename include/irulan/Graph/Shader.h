@@ -29,13 +29,12 @@ namespace Iru {
         void setFragment(std::string t_frag);
         void link();
 
-        void setMatrix(std::string t_name, Matrix &t_mat);
-        void setInt(std::string t_name, int t_val);
+        void setMatrix(std::string t_name, Matrix t_mat) const;
+        void setInt(std::string t_name, int t_val) const;
 
         bool check();
 
     private:
-        void use();
         void release();
 
         unsigned int m_id = 0;

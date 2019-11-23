@@ -9,9 +9,9 @@
 #include <initializer_list>
 #include <string>
 #include <ostream>
+#include "Math/Vector3.h"
 
 namespace Iru {
-    class Vector3;
     class Matrix {
     public:
         Matrix();
@@ -20,25 +20,28 @@ namespace Iru {
 
         float &operator[](int t_i);
         const float &operator[](int t_i) const;
+        float get(int t_i) const{ return m_mat[t_i];};
 
-        Matrix& operator=(const Matrix &t_r);
-        Matrix operator*(const Matrix &t_r);
+        Matrix& operator=(const Matrix &t_r) ;
+        Matrix operator*(const Matrix &t_r) const;
         Matrix& operator*=(const Matrix &t_r);
-        Matrix operator+(const Matrix &t_r);
+        Matrix operator+(const Matrix &t_r) const;
         Matrix& operator+=(const Matrix &t_r);
-        Matrix operator-(const Matrix &t_r);
+        Matrix operator-(const Matrix &t_r) const;
         Matrix& operator-=(const Matrix &t_r);
-
         friend std::ostream &operator<<(std::ostream &t_str, const Matrix &t_mat);
 
-        float *getPtr();
+        Vector3f apply(const Vector3f &t_vec) const;
 
         static Matrix getIdentity();
         static Matrix createPerspective(float t_fov, float t_asp, float t_n, float t_f);
         static Matrix createOrtho(int t_w, int t_h, float t_n, float t_f);
-        static Matrix createLookAt(Vector3 t_ori, Vector3 t_tar, Vector3 t_up);
-        static Matrix createRotation(Vector3 t_axis, float t_angle);
-        static Matrix createTranslation(Vector3 t_vec);
+        static Matrix createLookAt(const Vector3f &t_ori, const Vector3f &t_tar, const Vector3f &t_up);
+        static Matrix createRotation(const Vector3f &t_axis, float t_angle);
+        static Matrix createTranslation(const Vector3f &t_vec);
+        static Matrix createScale(const Vector3f &t_vec);
+
+        float *getPtr() ;
 
     private:
         float m_mat[16];
