@@ -6,11 +6,19 @@
 #define RSMOL_TEXTURE2D_H
 
 #include "Defines.h"
-#include "Graph/Texture.h"
+#include "Math/Vector2.h"
 #include <string>
 
 namespace Iru {
-    class Texture2D : public Texture {
+    struct Image{
+        int width;
+        int height;
+        unsigned char* data;
+    };
+
+
+
+    class Texture2D {
         friend class RenderTarget;
 
     public:
@@ -28,9 +36,14 @@ namespace Iru {
 
         static Texture2D _loadBMP(std::string t_path);
 
-    private:
-        void generate(int t_w, int t_h);
+        Vector2i getSize() const {return m_size;};
+
+        void create(int t_w, int t_h);
         void release();
+    private:
+        unsigned int m_id = 0;
+
+        Vector2i m_size;
     };
 }
 

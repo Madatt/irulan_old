@@ -14,7 +14,6 @@
 
 #include "Graph/VertexBuffer.h"
 #include "Graph/VertexArray.h"
-#include "Graph/Texture.h"
 #include "Graph/Texture2D.h"
 #include "Graph/Shader.h"
 #include "Graph/Render/RenderTarget.h"

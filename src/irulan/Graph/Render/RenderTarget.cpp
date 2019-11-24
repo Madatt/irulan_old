@@ -5,7 +5,6 @@
 #include "Graph/Shader.h"
 #include "Graph/VertexArray.h"
 #include "Graph/VertexBuffer.h"
-#include "Graph/Texture.h"
 #include "Graph/Texture2D.h"
 #include "Graph/Render/RenderTarget.h"
 #include "Graph/Render/Drawable.h"
@@ -24,7 +23,7 @@ namespace Iru {
         m_shader = &t_sha;
     }
 
-    void RenderTarget::setTexture(const Texture &t_tex, int t_n) {
+    void RenderTarget::setTexture(const Texture2D &t_tex, int t_n) {
         m_texture[t_n] = &t_tex;
     }
 

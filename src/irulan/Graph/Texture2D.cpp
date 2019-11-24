@@ -12,25 +12,25 @@
 
 namespace Iru {
     Texture2D::Texture2D(Image t_img) {
-        m_width = t_img.width;
-        m_height = t_img.height;
+        m_size.x = t_img.width;
+        m_size.y = t_img.height;
 
-        setData(0, 0, m_width, m_height, Iru::BGR, t_img.data);
+        setData(0, 0, m_size.x, m_size.y, Iru::BGR, t_img.data);
     }
 
     Texture2D::Texture2D(int t_w, int t_h) {
-        generate(t_w, t_h);
+        create(t_w, t_h);
     }
 
     Texture2D::Texture2D(Texture2D &&t_tex)
     {
         m_id = t_tex.m_id;
-        m_width = t_tex.m_width;
-        m_height = t_tex.m_height;
+        m_size.x = t_tex.m_size.x;
+        m_size.y = t_tex.m_size.y;
 
         t_tex.m_id = 0;
-        t_tex.m_width = 0;
-        t_tex.m_height = 0;
+        t_tex.m_size.x = 0;
+        t_tex.m_size.y = 0;
     }
 
     Texture2D::~Texture2D() {
@@ -42,29 +42,29 @@ namespace Iru {
         {
             release();
             m_id = t_r.m_id;
-            m_width = t_r.m_width;
-            m_height = t_r.m_height;
+            m_size.x = t_r.m_size.x;
+            m_size.y = t_r.m_size.y;
 
             t_r.m_id = 0;
         }
         return *this;
     }
 
-    void Texture2D::generate(int t_w, int t_h){
+    void Texture2D::create(int t_w, int t_h){
         release();
 
-        m_width = t_w;
-        m_height = t_h;
+        m_size.x = t_w;
+        m_size.y = t_h;
 
         glCreateTextures(GL_TEXTURE_2D, 1, &m_id);
         glTextureStorage2D(m_id, 1, GL_RGBA8, t_w, t_h);
-        glTextureParameteri(m_id, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTextureParameteri(m_id, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTextureParameteri(m_id, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTextureParameteri(m_id, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     }
 
     void Texture2D::setData(int t_x, int t_y, int t_w, int t_h, Format t_f, void *data) {
         if (!m_id)
-            generate(t_w + t_x, t_h + t_y);
+            create(t_w + t_x, t_h + t_y);
         glTextureSubImage2D(m_id, 0, t_x, t_y, t_w, t_h, t_f, GL_UNSIGNED_BYTE, data);
     }
 

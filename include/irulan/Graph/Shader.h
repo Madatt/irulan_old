@@ -34,8 +34,8 @@ namespace Iru {
 
         bool check();
 
-    private:
         void release();
+    private:
 
         unsigned int m_id = 0;
         unsigned int m_vid = 0;

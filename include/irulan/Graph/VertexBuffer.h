@@ -27,11 +27,11 @@ namespace Iru {
         void setSubData(unsigned int t_offset ,unsigned int t_size, void *t_data);
         void setStorage(unsigned int t_size, void *t_data);
 
-    private:
-        unsigned int m_id = 0;
-
         void create();
         void release();
+        
+    private:
+        unsigned int m_id = 0;
     };
 
 }

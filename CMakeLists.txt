@@ -20,7 +20,6 @@ set(SOURCES
         src/irulan/Graph/VertexArray.cpp
         src/irulan/Graph/VertexBuffer.cpp
         src/irulan/Graph/Shader.cpp
-        src/irulan/Graph/Texture.cpp
         src/irulan/Graph/Texture2D.cpp
 
         src/irulan/Graph2D/Font/BitmapFont.cpp
