@@ -9,6 +9,10 @@
 
 namespace Iru {
 
+    VertexArray::VertexArray() {
+        create();
+    }
+
     VertexArray::VertexArray(VertexArray &&t_r) {
         m_id = t_r.m_id;
         t_r.m_id = 0;
@@ -30,12 +34,10 @@ namespace Iru {
     }
 
     void VertexArray::attachVB(const VertexBuffer &t_vb, unsigned int t_i , unsigned int t_start, unsigned int t_stride){
-        create();
         glVertexArrayVertexBuffer(m_id, t_i, t_vb.m_id, t_start, t_stride);
     }
 
     void VertexArray::attachIB(const VertexBuffer &t_vb){
-        create();
         glVertexArrayElementBuffer(m_id, t_vb.m_id);
     }
 

@@ -11,19 +11,23 @@
 #include "glad/glad.h"
 
 namespace Iru {
-    Texture2D::Texture2D(Image t_img) {
+    Texture2D::Texture2D() {
+        glCreateTextures(GL_TEXTURE_2D, 1, &m_id);
+    }
+
+    Texture2D::Texture2D(Image t_img) : Texture2D() {
         m_size.x = t_img.width;
         m_size.y = t_img.height;
 
+        create(m_size.x, m_size.y);
         setData(0, 0, m_size.x, m_size.y, Iru::BGR, t_img.data);
     }
 
-    Texture2D::Texture2D(int t_w, int t_h) {
+    Texture2D::Texture2D(int t_w, int t_h) : Texture2D() {
         create(t_w, t_h);
     }
 
-    Texture2D::Texture2D(Texture2D &&t_tex)
-    {
+    Texture2D::Texture2D(Texture2D &&t_tex) : Texture2D() {
         m_id = t_tex.m_id;
         m_size.x = t_tex.m_size.x;
         m_size.y = t_tex.m_size.y;
@@ -37,9 +41,8 @@ namespace Iru {
         release();
     }
 
-    Texture2D& Texture2D::operator=(Texture2D&& t_r) {
-        if(this != &t_r)
-        {
+    Texture2D &Texture2D::operator=(Texture2D &&t_r) {
+        if (this != &t_r) {
             release();
             m_id = t_r.m_id;
             m_size.x = t_r.m_size.x;
@@ -50,21 +53,16 @@ namespace Iru {
         return *this;
     }
 
-    void Texture2D::create(int t_w, int t_h){
-        release();
-
+    void Texture2D::create(int t_w, int t_h) {
         m_size.x = t_w;
         m_size.y = t_h;
 
-        glCreateTextures(GL_TEXTURE_2D, 1, &m_id);
         glTextureStorage2D(m_id, 1, GL_RGBA8, t_w, t_h);
         glTextureParameteri(m_id, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTextureParameteri(m_id, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     }
 
     void Texture2D::setData(int t_x, int t_y, int t_w, int t_h, Format t_f, void *data) {
-        if (!m_id)
-            create(t_w + t_x, t_h + t_y);
         glTextureSubImage2D(m_id, 0, t_x, t_y, t_w, t_h, t_f, GL_UNSIGNED_BYTE, data);
     }
 
@@ -87,11 +85,18 @@ namespace Iru {
 
         file.seekg(pos, file.beg);
 
-        int off = std::ceil(24.0 * (double)img.width / 32.0) * 4;
-        int size = off * img.height ;
-        img.data = new unsigned char [size];
+        int off = std::ceil(24.0 * (double) img.width / 32.0) * 4;
+        int size = off * img.height;
+        img.data = new unsigned char[size];
+        file.read((char *) img.data, size);
 
-        file.read((char*)img.data, size);
+        /*unsigned char* tmp = new unsigned char [size];
+        for(int i = 0; i < size - off; i += off)
+        {
+            std::copy(img.data + i, img.data + i + off, tmp + size - off - i);
+        }
+
+        img.data = tmp;*/
 
         Texture2D tex(img);
 
@@ -99,7 +104,7 @@ namespace Iru {
     }
 
     void Texture2D::release() {
-        if(m_id)
+        if (m_id)
             glDeleteTextures(1, &m_id);
         m_id = 0;
     }

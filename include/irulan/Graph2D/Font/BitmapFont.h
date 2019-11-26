@@ -23,7 +23,7 @@ namespace Iru {
         int m_columns = 0;
         int m_chars = 0;
         float m_aspect = 0;
-        Rect m_cell;
+        Rectf m_cell;
 
         const Texture2D* m_tex = nullptr;
     };

@@ -9,7 +9,7 @@ namespace Iru {
     class Timer {
     public:
         Timer();
-        virtual ~Timer() = 0;
+        virtual ~Timer() = default;
 
         unsigned int reset();
         unsigned int getElapsed();

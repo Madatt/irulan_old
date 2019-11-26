@@ -47,7 +47,7 @@ namespace Iru {
 
 
     protected:
-        virtual void init();
+        virtual void init() = 0;
         virtual void draw(double t_dt) = 0;
         virtual void step(double t_dt) = 0;
         void use();

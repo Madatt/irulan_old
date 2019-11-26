@@ -16,13 +16,13 @@ private:
     void draw(double) override;
     void step(double) override;
 
-    Iru::VertexBuffer *vbo;
-    Iru::VertexArray *vao;
-    Iru::Shader *shd;
+    Iru::VertexBuffer *vbo{};
+    Iru::VertexArray *vao{};
+    Iru::Shader *shd{};
 
-    Iru::VertexBuffer *vbo2;
-    Iru::VertexArray *vao2;
-    Iru::Shader *shd2;
+    Iru::VertexBuffer *vbo2{};
+    Iru::VertexArray *vao2{};
+    Iru::Shader *shd2{};
 
     Iru::Matrix Proj;
     Iru::Matrix View;
@@ -33,8 +33,13 @@ private:
     Iru::Vector3f frm;
 
     Iru::Texture2D tex;
+    Iru::Texture2D tex2;
     Iru::BitmapFont font;
     Iru::Text text;
+    std::string str = "";
+    Iru::Timer timer;
+
+    Iru::Quads quads;
 };
 
 

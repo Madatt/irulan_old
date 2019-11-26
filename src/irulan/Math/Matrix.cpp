@@ -129,7 +129,7 @@ namespace Iru {
 
         return Matrix({
                               2.f / w, 0, 0, 0,
-                              0, -2 / w, 0, 0,
+                              0, -2 / h, 0, 0,
                               0, 0, 2.f / (t_n - t_f), 0,
                               -1, 1, (t_n + t_f) / (t_n - t_f), 1,
                       });

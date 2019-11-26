@@ -7,6 +7,9 @@
 
 #include "App.h"
 
+#include "Misc/Rect.h"
+#include "Misc/Timer.h"
+
 #include "Math/Matrix.h"
 #include "Math/Vector3.h"
 #include "Math/Vector2.h"
@@ -16,7 +19,9 @@
 #include "Graph/VertexArray.h"
 #include "Graph/Texture2D.h"
 #include "Graph/Shader.h"
+
 #include "Graph/Render/RenderTarget.h"
+#include "Graph/Render/Quads.h"
 
 #include "Graph2D/Font/Text.h"
 #include "Graph2D/Font/BitmapFont.h"

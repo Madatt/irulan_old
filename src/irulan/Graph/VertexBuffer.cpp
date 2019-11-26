@@ -6,6 +6,10 @@
 #include "glad/glad.h"
 
 namespace Iru {
+    VertexBuffer::VertexBuffer() {
+        create();
+    }
+
     VertexBuffer::VertexBuffer(VertexBuffer &&t_r) {
         m_id = t_r.m_id;
         t_r.m_id = 0;
@@ -27,12 +31,10 @@ namespace Iru {
     }
 
     void VertexBuffer::setData(unsigned int t_size, void *t_data) {
-        create();
         glNamedBufferData(m_id, t_size, t_data, GL_DYNAMIC_DRAW);
     }
 
     void VertexBuffer::setStorage(unsigned int t_size, void *t_data) {
-        create();
         glNamedBufferStorage(m_id, t_size, t_data, GL_DYNAMIC_STORAGE_BIT);
     }
 

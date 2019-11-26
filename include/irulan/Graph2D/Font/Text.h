@@ -15,23 +15,35 @@
 namespace Iru {
     class Text : public Drawable {
     public:
-        Text() = default;
-        Text(const BitmapFont& t_font, std::string t_text);
-        Text(const BitmapFont& t_font);
+        Text();
 
-
-        void setFont(const BitmapFont& t_font){m_font = &t_font;m_quads.setTexture(*t_font.m_tex);};
-        void set(std::string t_text){m_text = t_text;construct();};
+        void setFont(const BitmapFont& t_font){m_font = &t_font;};
+        void set(const std::string &t_text);
         void draw(RenderTarget &t_ren) override;
-        void setShader(const Shader& t_sha){m_quads.setShader(t_sha);};
-        void setTransform(const Matrix &t_tra){m_quads.setTransform(t_tra);};
+        void setShader(const Shader& t_sh){m_sh = &t_sh;};
+        void setTexture(const Texture2D& t_tex){m_tex = &t_tex;};
+        void setTransform(const Matrix &t_tra){m_tra = t_tra;};
     private:
-        Quads m_quads;
+        VertexArray m_va;
+        VertexBuffer m_vb;
+        VertexBuffer m_ib;
+        const Shader* m_sh;
+        const Texture2D* m_tex;
+
+        Matrix m_ort;
+        Matrix m_tra;
+
+        std::vector<float> m_data;
+        std::vector<unsigned char> m_ind;
 
         const BitmapFont* m_font;
         std::string m_text = "";
+        int m_count = 0;
+        int m_line = 0;
+        int m_pos = 0;
 
-        void construct();
+        void construct(const std::string &t_text);
+        void clear();
     };
 }
 

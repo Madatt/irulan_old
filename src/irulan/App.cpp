@@ -14,11 +14,6 @@
 namespace Iru {
     App::App(const Vector2i &t_viewport)
     :RenderTarget(t_viewport){
-
-    }
-
-
-    void App::init() {
         if (m_init)
             return;
 

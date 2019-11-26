@@ -22,7 +22,7 @@ namespace Iru {
         friend class RenderTarget;
 
     public:
-        Texture2D() = default;
+        Texture2D();
         Texture2D(Texture2D& t_tex) = delete;
         Texture2D(Texture2D&& t_tex);
         Texture2D(Image t_img);
@@ -39,11 +39,13 @@ namespace Iru {
         Vector2i getSize() const {return m_size;};
 
         void create(int t_w, int t_h);
-        void release();
+
     private:
         unsigned int m_id = 0;
 
         Vector2i m_size;
+
+        void release();
     };
 }
 

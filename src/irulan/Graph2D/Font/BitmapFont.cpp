@@ -18,7 +18,7 @@ namespace Iru {
         float x = (float) t_w / (float) t_tex.getSize().x;
         float y = (float) t_h / (float) t_tex.getSize().y;
         m_aspect = (float) t_h / (float) t_w;
-        m_cell = Rect(t_w, t_h, x, y);
+        m_cell = Rectf(t_w, t_h, x, y);
     }
 
 

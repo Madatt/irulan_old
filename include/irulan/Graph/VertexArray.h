@@ -14,7 +14,7 @@ namespace Iru {
         friend class RenderTarget;
 
     public:
-        VertexArray() = default;
+        VertexArray();
         VertexArray(const VertexArray& t_r) = delete;
         VertexArray(VertexArray&& t_r);
         ~VertexArray();
@@ -26,10 +26,11 @@ namespace Iru {
         void attachIB(const VertexBuffer &t_vb);
         void setAttrib(unsigned int t_vi , unsigned int t_i, unsigned int t_count, unsigned int t_off) const;
 
-        void create();
-        void release();
     private:
         unsigned int m_id = 0;
+
+        void create();
+        void release();
 
     };
 }

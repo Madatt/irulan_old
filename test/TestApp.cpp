@@ -5,20 +5,28 @@
 #include "TestApp.h"
 
 TestApp::TestApp()
-:App(Iru::Vector2i(1280, 720)){
+        : App(Iru::Vector2i(1280, 720)) {
 
 }
 
-void TestApp::draw(double t_delta){
+void TestApp::draw(double t_delta) {
     clear();
 
     render(text);
+    render(quads);
 
     flip();
 }
 
 void TestApp::step(double t_delta) {
     test += t_delta * 60;
+
+    if(timer.getElapsed() >= 1000)
+    {
+        timer.reset();
+        str += (char)(rand() % 100 + 32);
+        text.set(str);
+    }
 
 }
 
@@ -45,10 +53,6 @@ void TestApp::init() {
                         "    FragColor = vec4(1, 1, 1,1)*texture(u_tex, Tex);\n"
                         "} ";
 
-    App::init();
-
-
-
     shd = new Iru::Shader(vers, frags);
 
     forw = Iru::Vector3f(0, 0, 4);
@@ -57,12 +61,24 @@ void TestApp::init() {
 
 
     tex = Iru::Texture2D::_loadBMP("font.BMP");
+    tex2 = Iru::Texture2D::_loadBMP("test.BMP");
 
-    font.setTexture(tex, 7, 18, 7, 10);
+    font.setTexture(tex, 6, 18, 7, 8);
 
     text.setFont(font);
     text.setShader(*shd);
-    text.setTransform(Iru::Matrix::createScale(Iru::Vector3f(10, 10, 0)));
-    text.set("abcd");
+    text.setTransform(Iru::Matrix::createScale(Iru::Vector3f(5, 5, 0)));
+
+    str = "huj dziala\nomg, nawet\nmultilinie!!";
+    text.set(str);
+
+    quads.add(Iru::Rectf(0, 0, 128, 128), Iru::Rectf(0, 0, 1, 1));
+    quads.add(Iru::Rectf(256, 256, 128, 128), Iru::Rectf(0, 0, 1, 1));
+    quads.setTexture(tex2);
+    quads.setShader(*shd);
+
+
+    timer.reset();
+
 
 }
