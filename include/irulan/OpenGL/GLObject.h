@@ -5,7 +5,7 @@
 #ifndef IRULAN_GLOBJECT_H
 #define IRULAN_GLOBJECT_H
 
-
+#include "OpenGL/GLTraits.h"
 
 namespace Iru {
 

@@ -33,7 +33,7 @@ set(SOURCES
         src/irulan/Misc/Timer.cpp
 
         src/irulan/OpenGL/Debug.cpp
-        src/irulan/OpenGL/GLTexture.cpp
+        src/irulan/OpenGL/GLTraits.cpp
 
         src/irulan/App.cpp
 

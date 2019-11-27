@@ -12,7 +12,7 @@
 
 namespace Iru {
     Texture2D::Texture2D()
-            : m_hnd() {
+            : m_ptr() {
 
     }
 
@@ -35,13 +35,13 @@ namespace Iru {
         m_size.x = t_w;
         m_size.y = t_h;
 
-        glTextureStorage2D(m_hnd.get(), 1, GL_RGBA8, t_w, t_h);
-        glTextureParameteri(m_hnd.get(), GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTextureParameteri(m_hnd.get(), GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTextureStorage2D(m_ptr.get(), 1, GL_RGBA8, t_w, t_h);
+        glTextureParameteri(m_ptr.get(), GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTextureParameteri(m_ptr.get(), GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     }
 
     void Texture2D::setData(int t_x, int t_y, int t_w, int t_h, Format t_f, void *data) {
-        glTextureSubImage2D(m_hnd.get(), 0, t_x, t_y, t_w, t_h, t_f, GL_UNSIGNED_BYTE, data);
+        glTextureSubImage2D(m_ptr.get(), 0, t_x, t_y, t_w, t_h, t_f, GL_UNSIGNED_BYTE, data);
     }
 
     Texture2D Texture2D::_loadBMP(std::string t_path) {

@@ -7,7 +7,7 @@
 
 #include "Defines.h"
 #include "Math/Vector2.h"
-#include "OpenGL/GLTexture.h"
+#include "OpenGL/GLObject.h"
 #include <string>
 
 namespace Iru {
@@ -37,8 +37,7 @@ namespace Iru {
         void create(int t_w, int t_h);
 
     private:
-        GLObject<GLTexture> m_hnd;
-        //unsigned int m_id = 0;
+        GLObject<GLTexture> m_ptr;
 
         Vector2i m_size;
     };

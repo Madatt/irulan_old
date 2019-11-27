@@ -6,6 +6,7 @@
 #define RSMOL_VERTEXBUFFER_H
 
 #include "glad/glad.h"
+#include "OpenGL/GLObject.h"
 #include <vector>
 
 namespace Iru {
@@ -15,23 +16,14 @@ namespace Iru {
 
     public:
         VertexBuffer();
-        VertexBuffer(const VertexBuffer& t_r) = delete;
-        VertexBuffer(VertexBuffer&& t_r);
-        ~VertexBuffer();
-
-        VertexBuffer& operator=(const VertexBuffer& t_r) = delete;
-        VertexBuffer& operator=(VertexBuffer&& t_r);
-
 
         void setData(unsigned int t_size, void *t_data);
         void setSubData(unsigned int t_offset ,unsigned int t_size, void *t_data);
         void setStorage(unsigned int t_size, void *t_data);
         
     private:
-        unsigned int m_id = 0;
+        GLObject<GLVertexBuffer> m_ptr;
 
-        void create();
-        void release();
     };
 
 }

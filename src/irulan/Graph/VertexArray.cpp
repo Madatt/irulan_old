@@ -9,58 +9,30 @@
 
 namespace Iru {
 
-    VertexArray::VertexArray() {
-        create();
+    VertexArray::VertexArray()
+    : m_ptr(){
+
     }
 
-    VertexArray::VertexArray(VertexArray &&t_r) {
-        m_id = t_r.m_id;
-        t_r.m_id = 0;
-    }
-
-    VertexArray::~VertexArray() {
-        release();
-    }
-
-    VertexArray &VertexArray::operator=(VertexArray &&t_r) {
-        if(this != &t_r)
-        {
-            release();
-            m_id = t_r.m_id;
-
-            t_r.m_id = 0;
-        }
-        return *this;
-    }
 
     void VertexArray::attachVB(const VertexBuffer &t_vb, unsigned int t_i , unsigned int t_start, unsigned int t_stride){
-        glVertexArrayVertexBuffer(m_id, t_i, t_vb.m_id, t_start, t_stride);
+        glVertexArrayVertexBuffer(m_ptr.get(), t_i, t_vb.m_ptr.get(), t_start, t_stride);
     }
 
     void VertexArray::attachIB(const VertexBuffer &t_vb){
-        glVertexArrayElementBuffer(m_id, t_vb.m_id);
+        glVertexArrayElementBuffer(m_ptr.get(), t_vb.m_ptr.get());
     }
 
     void VertexArray::setAttrib(unsigned int t_vi , unsigned int t_i, unsigned int t_count, unsigned int t_off) const{
-        glBindVertexArray(m_id);
+        glBindVertexArray(m_ptr.get());
 
-        glEnableVertexArrayAttrib(m_id, t_i);
+        glEnableVertexArrayAttrib(m_ptr.get(), t_i);
 
-        glVertexArrayAttribFormat(m_id, t_i, t_count, GL_FLOAT, GL_FALSE, t_off);
+        glVertexArrayAttribFormat(m_ptr.get(), t_i, t_count, GL_FLOAT, GL_FALSE, t_off);
 
-        glVertexArrayAttribBinding(m_id, t_i, t_vi);
+        glVertexArrayAttribBinding(m_ptr.get(), t_i, t_vi);
     }
 
-    void VertexArray::create() {
-        if(!m_id)
-            glCreateVertexArrays(1, &m_id);
-    }
-
-    void VertexArray::release() {
-        if(m_id)
-            glDeleteVertexArrays(1, &m_id);
-        m_id = 0;
-    }
 
 }
 

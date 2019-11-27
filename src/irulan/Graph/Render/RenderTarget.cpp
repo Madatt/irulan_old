@@ -35,12 +35,12 @@ namespace Iru {
 
         for (int i = 0; i < 16; i++) {
             if (m_texture[i] != nullptr) {
-                glBindTextureUnit(i, m_texture[i]->m_hnd.get());
+                glBindTextureUnit(i, m_texture[i]->m_ptr.get());
             }
         }
 
-        glBindVertexArray(m_va->m_id);
-        glUseProgram(m_shader->m_id);
+        glBindVertexArray(m_va->m_ptr.get());
+        glUseProgram(m_shader->m_ptr.get());
         glDrawArrays(t_type, t_s, t_c);
     }
 
@@ -52,12 +52,12 @@ namespace Iru {
 
         for (int i = 0; i < 16; i++) {
             if (m_texture[i] != nullptr) {
-                glBindTextureUnit(i, m_texture[i]->m_hnd.get());
+                glBindTextureUnit(i, m_texture[i]->m_ptr.get());
             }
         }
 
-        glBindVertexArray(m_va->m_id);
-        glUseProgram(m_shader->m_id);
+        glBindVertexArray(m_va->m_ptr.get());
+        glUseProgram(m_shader->m_ptr.get());
         glDrawElements(t_type, t_c, GL_UNSIGNED_BYTE, (void *) t_offset);
     }
 
@@ -69,13 +69,13 @@ namespace Iru {
 
         for (int i = 0; i < 16; i++) {
             if (m_texture[i] != nullptr) {
-                glBindTextureUnit(i, m_texture[i]->m_hnd.get());
+                glBindTextureUnit(i, m_texture[i]->m_ptr.get());
             }
         }
 
 
-        glBindVertexArray(m_va->m_id);
-        glUseProgram(m_shader->m_id);
+        glBindVertexArray(m_va->m_ptr.get());
+        glUseProgram(m_shader->m_ptr.get());
         glDrawArraysInstanced(t_type, t_s, t_c, t_ic);
     }
 

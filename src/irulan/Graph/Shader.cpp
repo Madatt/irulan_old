@@ -9,62 +9,35 @@
 #include <iostream>
 
 namespace Iru {
-    Shader::Shader() {
+    Shader::Shader()
+            : m_ptr() {
 
     }
 
-    Shader::Shader(std::string t_ver, std::string t_frag) {
+    Shader::Shader(std::string t_ver, std::string t_frag)
+            : m_ptr() {
         setVertex(t_ver);
         setFragment(t_frag);
         link();
     }
 
-    Shader::Shader(Shader &&t_r) {
-        m_id = t_r.m_id;
-        m_vid = t_r.m_vid;
-        m_fid = t_r.m_fid;
-
-        t_r.m_id = 0;
-        t_r.m_vid = 0;
-        t_r.m_fid = 0;
-
+    void Shader::setMatrix(std::string t_name, Matrix t_mat) const {
+        if (m_ptr.get())
+            glProgramUniformMatrix4fv(m_ptr.get(), glGetUniformLocation(m_ptr.get(), t_name.c_str()), 1, false,
+                                      t_mat.getPtr());
     }
 
-    Shader &Shader::operator=(Shader &&t_r) {
-        if(this != &t_r)
-        {
-            release();
-            m_id = t_r.m_id;
-            m_vid = t_r.m_vid;
-            m_fid = t_r.m_fid;
-
-            t_r.m_id = 0;
-            t_r.m_vid = 0;
-            t_r.m_fid = 0;
-        }
-        return *this;
-    }
-
-    Shader::~Shader() {
-        release();
-    }
-
-    void Shader::setMatrix(std::string t_name, Matrix t_mat) const{
-        if(m_id)
-            glProgramUniformMatrix4fv(m_id ,glGetUniformLocation(m_id, t_name.c_str()), 1, false, t_mat.getPtr());
-    }
-
-    void Shader::setInt(std::string t_name, int t_val) const{
-        if(m_id)
-            glProgramUniform1i(m_id, glGetUniformLocation(m_id, t_name.c_str()), t_val);
+    void Shader::setInt(std::string t_name, int t_val) const {
+        if (m_ptr.get())
+            glProgramUniform1i(m_ptr.get(), glGetUniformLocation(m_ptr.get(), t_name.c_str()), t_val);
     }
 
     bool Shader::check() {
-        return m_id;
+        return m_ptr.get();
     }
 
     void Shader::setVertex(std::string t_ver) {
-        if (m_vid || m_id)
+        if (m_vid)
             return;
 
         const char *ver_c = t_ver.c_str();
@@ -83,7 +56,7 @@ namespace Iru {
     }
 
     void Shader::setFragment(std::string t_frag) {
-        if (m_fid || m_id)
+        if (m_fid)
             return;
 
         const char *frag_c = t_frag.c_str();
@@ -105,41 +78,21 @@ namespace Iru {
         char msg[512];
         int succ;
 
-        if (m_id)
-            return;
-
         if (!m_fid || !m_vid)
             return;
 
-        m_id = glCreateProgram();
-        glAttachShader(m_id, m_vid);
-        glAttachShader(m_id, m_fid);
-        glLinkProgram(m_id);
+        glAttachShader(m_ptr.get(), m_vid);
+        glAttachShader(m_ptr.get(), m_fid);
+        glLinkProgram(m_ptr.get());
 
-        glGetProgramiv(m_id, GL_LINK_STATUS, &succ);
+        glGetProgramiv(m_ptr.get(), GL_LINK_STATUS, &succ);
         if (!succ) {
-            glGetProgramInfoLog(m_id, 512, NULL, msg);
+            glGetProgramInfoLog(m_ptr.get(), 512, NULL, msg);
             std::cout << "[Error] Shader linking failed: " << msg << std::endl;
-            m_id = 0;
         }
 
         glDeleteShader(m_fid);
         glDeleteShader(m_vid);
-    }
-
-    void Shader::release() {
-        if (m_id)
-            glDeleteProgram(m_id);
-
-        if (m_vid)
-            glDeleteShader(m_vid);
-
-        if (m_fid)
-            glDeleteShader(m_fid);
-
-        m_id = 0;
-        m_vid = 0;
-        m_fid = 0;
     }
 
 }
