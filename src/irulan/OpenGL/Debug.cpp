@@ -4,7 +4,7 @@
 
 #include <cstdio>
 #include <cstdlib>
-#include "gl_debug.h"
+#include "OpenGL/Debug.h"
 
 
 namespace Iru{

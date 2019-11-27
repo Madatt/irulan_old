@@ -35,7 +35,7 @@ namespace Iru {
 
         for (int i = 0; i < 16; i++) {
             if (m_texture[i] != nullptr) {
-                glBindTextureUnit(i, m_texture[i]->m_id);
+                glBindTextureUnit(i, m_texture[i]->m_hnd.get());
             }
         }
 
@@ -52,7 +52,7 @@ namespace Iru {
 
         for (int i = 0; i < 16; i++) {
             if (m_texture[i] != nullptr) {
-                glBindTextureUnit(i, m_texture[i]->m_id);
+                glBindTextureUnit(i, m_texture[i]->m_hnd.get());
             }
         }
 
@@ -69,7 +69,7 @@ namespace Iru {
 
         for (int i = 0; i < 16; i++) {
             if (m_texture[i] != nullptr) {
-                glBindTextureUnit(i, m_texture[i]->m_id);
+                glBindTextureUnit(i, m_texture[i]->m_hnd.get());
             }
         }
 

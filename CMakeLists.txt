@@ -28,9 +28,13 @@ set(SOURCES
         src/irulan/Graph/Render/RenderTarget.cpp
         src/irulan/Graph/Render/Quads.cpp
 
+        src/irulan/Resources/Resource.cpp
+
         src/irulan/Misc/Timer.cpp
 
-        src/irulan/gl_debug.cpp
+        src/irulan/OpenGL/Debug.cpp
+        src/irulan/OpenGL/GLTexture.cpp
+
         src/irulan/App.cpp
 
 

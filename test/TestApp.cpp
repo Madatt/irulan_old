@@ -21,10 +21,9 @@ void TestApp::draw(double t_delta) {
 void TestApp::step(double t_delta) {
     test += t_delta * 60;
 
-    if(timer.getElapsed() >= 1000)
-    {
+    if (timer.getElapsed() >= 1000) {
         timer.reset();
-        str += (char)(rand() % 100 + 32);
+        str += (char) (rand() % 100 + 32);
         text.set(str);
     }
 
@@ -67,7 +66,9 @@ void TestApp::init() {
 
     text.setFont(font);
     text.setShader(*shd);
-    text.setTransform(Iru::Matrix::createScale(Iru::Vector3f(5, 5, 0)));
+    text.setTransform(Iru::Matrix::createTranslation(Iru::Vector3f(328, 56, 0)) *
+                      Iru::Matrix::createScale(Iru::Vector3f(5, 5, 0)) *
+                      Iru::Matrix::createRotation(Iru::Vector3f(0, 0, 1.f), 45.f));
 
     str = "huj dziala\nomg, nawet\nmultilinie!!";
     text.set(str);

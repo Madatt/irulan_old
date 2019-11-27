@@ -2,8 +2,8 @@
 // Created by Madatt on 16.11.2019.
 //
 
-#ifndef IRULAN_GL_DEBUG_H
-#define IRULAN_GL_DEBUG_H
+#ifndef IRULAN_DEBUG_H
+#define IRULAN_DEBUG_H
 
 #include "glad/glad.h"
 namespace Iru {
@@ -18,4 +18,4 @@ namespace Iru {
             const void* t_userParam
     );
 }
-#endif //IRULAN_GL_DEBUG_H
+#endif //IRULAN_DEBUG_H

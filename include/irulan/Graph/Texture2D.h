@@ -7,6 +7,7 @@
 
 #include "Defines.h"
 #include "Math/Vector2.h"
+#include "OpenGL/GLTexture.h"
 #include <string>
 
 namespace Iru {
@@ -23,14 +24,9 @@ namespace Iru {
 
     public:
         Texture2D();
-        Texture2D(Texture2D& t_tex) = delete;
-        Texture2D(Texture2D&& t_tex);
         Texture2D(Image t_img);
         Texture2D(int t_w, int t_h);
         ~Texture2D();
-
-        Texture2D& operator=(const Texture2D& t_r) = delete;
-        Texture2D& operator=(Texture2D&& t_r);
 
         void setData(int t_x, int t_y, int t_w, int t_h, Format t_f, void *data);
 
@@ -41,11 +37,10 @@ namespace Iru {
         void create(int t_w, int t_h);
 
     private:
-        unsigned int m_id = 0;
+        GLObject<GLTexture> m_hnd;
+        //unsigned int m_id = 0;
 
         Vector2i m_size;
-
-        void release();
     };
 }
 

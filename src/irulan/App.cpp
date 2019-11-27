@@ -4,7 +4,7 @@
 
 #include "App.h"
 #include "glad.h"
-#include "gl_debug.h"
+#include "OpenGL/Debug.h"
 #include "Shaders.h"
 
 #include <iostream>
