@@ -2,7 +2,7 @@
 // Created by Madatt on 21.11.2019.
 //
 
-#include "Graph/Render/Quads.h"
+#include "irulan/Graph/2D/Quads.h"
 #include "Graph/Shader.h"
 
 namespace Iru {

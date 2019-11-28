@@ -2,7 +2,7 @@
 // Created by Madatt on 27.11.2019.
 //
 
-#include "irulan/OpenGL/GLTraits.h"
+#include "irulan/System/OpenGL/GLTraits.h"
 #include "glad.h"
 
 namespace Iru {

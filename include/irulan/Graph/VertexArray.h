@@ -5,8 +5,8 @@
 #ifndef RSMOL_VERTEXARRAY_H
 #define RSMOL_VERTEXARRAY_H
 
-#include "Defines.h"
-#include "OpenGL/GLObject.h"
+#include "irulan/System/Defines.h"
+#include "System/OpenGL/GLObject.h"
 
 namespace Iru {
     class VertexBuffer;

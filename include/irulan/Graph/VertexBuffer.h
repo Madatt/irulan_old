@@ -6,7 +6,7 @@
 #define RSMOL_VERTEXBUFFER_H
 
 #include "glad/glad.h"
-#include "OpenGL/GLObject.h"
+#include "System/OpenGL/GLObject.h"
 #include <vector>
 
 namespace Iru {

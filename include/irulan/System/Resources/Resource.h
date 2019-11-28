@@ -7,6 +7,7 @@
 
 namespace Iru {
     class Resource {
+    public:
         virtual ~Resource() = 0;
     };
 }

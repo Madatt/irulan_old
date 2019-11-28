@@ -8,6 +8,7 @@
 #include "SDL2/SDL.h"
 #include "Graph/Render/RenderTarget.h"
 #include "Graph/Shader.h"
+#include "Resources/ResourceManager.h"
 
 namespace Iru {
     class Renderer;
@@ -18,7 +19,7 @@ namespace Iru {
         unsigned int time = 0;
     };
 
-    class App : public RenderTarget {
+    class App : public RenderTarget, public ResourceManager {
     public:
         App(const Vector2i &t_viewport);
         virtual ~App() = default;

@@ -2,9 +2,9 @@
 // Created by Dawid on 15.08.2019.
 //
 
-#include "App.h"
+#include "irulan/System/App.h"
 #include "glad.h"
-#include "OpenGL/Debug.h"
+#include "System/OpenGL/Debug.h"
 #include "Shaders.h"
 
 #include <iostream>

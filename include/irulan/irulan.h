@@ -5,7 +5,10 @@
 #ifndef IRULAN_IRULAN_H
 #define IRULAN_IRULAN_H
 
-#include "App.h"
+#include "irulan/System/App.h"
+
+#include "System/Resources/Resource.h"
+#include "System/Resources/ResourceManager.h"
 
 #include "Misc/Rect.h"
 #include "Misc/Timer.h"
@@ -21,9 +24,9 @@
 #include "Graph/Shader.h"
 
 #include "Graph/Render/RenderTarget.h"
-#include "Graph/Render/Quads.h"
+#include "irulan/Graph/2D/Quads.h"
 
-#include "Graph2D/Font/Text.h"
-#include "Graph2D/Font/BitmapFont.h"
+#include "Graph/2D/Font/Text.h"
+#include "Graph/2D/Font/BitmapFont.h"
 
 #endif //IRULAN_IRULAN_H

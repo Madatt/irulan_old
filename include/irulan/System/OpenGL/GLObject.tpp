@@ -2,7 +2,7 @@
 // Created by Madatt on 27.11.2019.
 //
 
-#include "irulan/OpenGL/GLObject.h"
+#include "GLObject.h"
 #include <iostream>
 
 
@@ -34,6 +34,7 @@ namespace Iru {
 
         if(m_rc->get() <= 0)
         {
+            //std::cout << "Deleted" << std::endl;
             delete m_rc;
             T::release(m_id);
         }

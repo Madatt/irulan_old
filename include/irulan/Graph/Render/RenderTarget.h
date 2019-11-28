@@ -6,7 +6,7 @@
 #define IRULAN_RENDERTARGET_H
 
 #include "irulan/Misc/Rect.h"
-#include "irulan/Defines.h"
+#include "irulan/System/Defines.h"
 #include "Math/Vector2.h"
 #include "Math/Matrix.h"
 #include "Graph/Texture2D.h"

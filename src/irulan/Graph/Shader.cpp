@@ -95,4 +95,8 @@ namespace Iru {
         glDeleteShader(m_vid);
     }
 
+    Shader::~Shader() {
+
+    }
+
 }

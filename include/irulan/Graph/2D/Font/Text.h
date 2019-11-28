@@ -5,9 +5,9 @@
 #ifndef IRULAN_TEXT_H
 #define IRULAN_TEXT_H
 
-#include "Graph2D/Font/BitmapFont.h"
+#include "Graph/2D/Font/BitmapFont.h"
 #include "Graph/Render/Drawable.h"
-#include "Graph/Render/Quads.h"
+#include "irulan/Graph/2D/Quads.h"
 #include "Graph/VertexArray.h"
 #include "Graph/VertexBuffer.h"
 #include <vector>

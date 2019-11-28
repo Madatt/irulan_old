@@ -5,9 +5,10 @@
 #ifndef RSMOL_TEXTURE2D_H
 #define RSMOL_TEXTURE2D_H
 
-#include "Defines.h"
+#include "irulan/System/Defines.h"
 #include "Math/Vector2.h"
-#include "OpenGL/GLObject.h"
+#include "System/OpenGL/GLObject.h"
+#include "System/Resources/Resource.h"
 #include <string>
 
 namespace Iru {
@@ -19,14 +20,14 @@ namespace Iru {
 
 
 
-    class Texture2D {
+    class Texture2D : public Resource{
         friend class RenderTarget;
 
     public:
         Texture2D();
         Texture2D(Image t_img);
         Texture2D(int t_w, int t_h);
-        ~Texture2D();
+        ~Texture2D() = default;
 
         void setData(int t_x, int t_y, int t_w, int t_h, Format t_f, void *data);
 

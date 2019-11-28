@@ -22,20 +22,21 @@ set(SOURCES
         src/irulan/Graph/Shader.cpp
         src/irulan/Graph/Texture2D.cpp
 
-        src/irulan/Graph2D/Font/BitmapFont.cpp
-        src/irulan/Graph2D/Font/Text.cpp
+        src/irulan/Graph/2D/Font/BitmapFont.cpp
+        src/irulan/Graph/2D/Font/Text.cpp
 
         src/irulan/Graph/Render/RenderTarget.cpp
-        src/irulan/Graph/Render/Quads.cpp
+        src/irulan/Graph/2D/Quads.cpp
 
-        src/irulan/Resources/Resource.cpp
+        src/irulan/System/Resources/Resource.cpp
+        src/irulan/System/Resources/ResourceManager.cpp
 
         src/irulan/Misc/Timer.cpp
 
-        src/irulan/OpenGL/Debug.cpp
-        src/irulan/OpenGL/GLTraits.cpp
+        src/irulan/System/OpenGL/Debug.cpp
+        src/irulan/System/OpenGL/GLTraits.cpp
 
-        src/irulan/App.cpp
+        src/irulan/System/App.cpp
 
 
         )

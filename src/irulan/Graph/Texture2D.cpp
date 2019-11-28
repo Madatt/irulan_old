@@ -28,8 +28,7 @@ namespace Iru {
         create(t_w, t_h);
     }
 
-    Texture2D::~Texture2D() {
-    }
+
 
     void Texture2D::create(int t_w, int t_h) {
         m_size.x = t_w;
@@ -47,7 +46,6 @@ namespace Iru {
     Texture2D Texture2D::_loadBMP(std::string t_path) {
         std::ifstream file(t_path, std::ios::binary);
         if (!file.is_open()) {
-            std::cout << "asd" << std::endl;
             return Texture2D();
         }
 

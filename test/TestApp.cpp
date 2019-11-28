@@ -62,7 +62,9 @@ void TestApp::init() {
     tex = Iru::Texture2D::_loadBMP("font.BMP");
     tex2 = Iru::Texture2D::_loadBMP("test.BMP");
 
-    font.setTexture(tex, 6, 18, 7, 8);
+    addResource("test", &tex);
+
+    font.setTexture(*getResource<Iru::Texture2D>("test"), 6, 18, 7, 8);
 
     text.setFont(font);
     text.setShader(*shd);

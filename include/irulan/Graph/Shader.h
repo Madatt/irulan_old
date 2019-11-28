@@ -7,18 +7,20 @@
 
 
 #include <string>
-#include "OpenGL/GLObject.h"
+#include "System/OpenGL/GLObject.h"
+#include "System/Resources/Resource.h"
 
 
 namespace Iru {
     class Matrix;
 
-    class Shader {
+    class Shader : public Resource {
         friend class RenderTarget;
 
     public:
         Shader();
         Shader(std::string t_ver, std::string t_frag);
+        ~Shader() override;
 
         void setVertex(std::string t_ver);
         void setFragment(std::string t_frag);

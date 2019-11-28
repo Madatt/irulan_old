@@ -2,8 +2,8 @@
 // Created by Madatt on 12.11.2019.
 //
 
-#include "Graph2D/Font/Text.h"
-#include "App.h"
+#include "Graph/2D/Font/Text.h"
+#include "irulan/System/App.h"
 #include <string>
 #include <iostream>
 
