@@ -68,7 +68,6 @@ namespace Iru {
     }
 
     void Quads::draw(RenderTarget &t_ren) {
-
         m_ort = t_ren.getOrt();
         m_sh->setMatrix("u_tra", m_tra);
         m_sh->setMatrix("u_ort", m_ort);

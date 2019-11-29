@@ -38,8 +38,8 @@ set(SOURCES
 
         src/irulan/System/App.cpp
 
-
-        )
+        src/irulan/Graph/3D/MeshData.cpp
+        src/irulan/System/Resources/Loaders/MeshLoader.cpp)
 
 include_directories(${INCLUDES})
 add_library(irulan ${SOURCES})

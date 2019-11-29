@@ -9,6 +9,7 @@
 
 #include "System/Resources/Resource.h"
 #include "System/Resources/ResourceManager.h"
+#include "System/Resources/Loaders/MeshLoader.h"
 
 #include "Misc/Rect.h"
 #include "Misc/Timer.h"

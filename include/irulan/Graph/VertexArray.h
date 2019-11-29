@@ -19,7 +19,7 @@ namespace Iru {
 
         void attachVB(const VertexBuffer &t_vb, unsigned int t_i, unsigned int t_start , unsigned int t_stride);
         void attachIB(const VertexBuffer &t_vb);
-        void setAttrib(unsigned int t_vi , unsigned int t_i, unsigned int t_count, unsigned int t_off) const;
+        void setAttrib(unsigned int t_vi , unsigned int t_i, unsigned int t_count, unsigned int t_off);
 
     private:
         GLObject<GLVertexArray> m_ptr;

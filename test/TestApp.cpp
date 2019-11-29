@@ -59,8 +59,8 @@ void TestApp::init() {
     frm = Iru::Vector3f(0.5, 0, 0);
 
 
-    tex = Iru::Texture2D::_loadBMP("font.BMP");
-    tex2 = Iru::Texture2D::_loadBMP("test.BMP");
+    tex = Iru::Texture2D::_loadBMP("font.bmp");
+    tex2 = Iru::Texture2D::_loadBMP("test.bmp");
 
     addResource("test", &tex);
 
@@ -83,5 +83,5 @@ void TestApp::init() {
 
     timer.reset();
 
-
+    Iru::MeshLoader::loadObj("teapot.obj");
 }
