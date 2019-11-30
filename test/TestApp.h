@@ -16,13 +16,13 @@ private:
     void draw(double) override;
     void step(double) override;
 
-    Iru::VertexBuffer *vbo{};
-    Iru::VertexArray *vao{};
     Iru::Shader *shd{};
-
-    Iru::VertexBuffer *vbo2{};
-    Iru::VertexArray *vao2{};
     Iru::Shader *shd2{};
+
+    Iru::VertexBuffer *vb{};
+    Iru::VertexBuffer *ib{};
+    Iru::VertexArray *va{};
+
 
     Iru::Matrix Proj;
     Iru::Matrix View;
@@ -40,6 +40,9 @@ private:
     Iru::Timer timer;
 
     Iru::Quads quads;
+    int c = 0;
+
+
 };
 
 

@@ -73,7 +73,7 @@ namespace Iru {
                 step(1.0 / 60.0);
                 m_accu -= 1000.0 / 60.0;
             }
-
+            glEnable(GL_DEPTH_TEST);
             draw(1.0 / 60.0);
         }
 

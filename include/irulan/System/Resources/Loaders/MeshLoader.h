@@ -8,6 +8,7 @@
 #include "Graph/3D/MeshData.h"
 
 namespace Iru::MeshLoader {
+    std::vector<std::string> split(const std::string& t_str, char t_de);
     MeshData loadObj(std::string t_path);
 }
 

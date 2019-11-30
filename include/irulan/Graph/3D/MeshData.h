@@ -16,8 +16,8 @@ namespace Iru {
         MeshData(std::vector<float> t_vers, std::vector<unsigned char> t_ind);
         ~MeshData() = default;
 
-        [[nodiscard]] const std::vector<float>& getData() const {return m_vers;};
-        [[nodiscard]] const std::vector<unsigned char>& getInd() const {return m_ind;};
+        const std::vector<float>& getData() const {return m_vers;};
+        const std::vector<unsigned char>& getInd() const {return m_ind;};
     private:
         std::vector<float> m_vers;
         std::vector<unsigned char> m_ind;
