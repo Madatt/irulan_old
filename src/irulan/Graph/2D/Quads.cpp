@@ -4,31 +4,22 @@
 
 #include "irulan/Graph/2D/Quads.h"
 #include "Graph/Shader.h"
+#include "System/App.h"
 
 namespace Iru {
-    Quads::Quads() {
+    Quads::Quads(App* t_app) {
         m_max = 25;
 
-        m_va.attachVB(m_vb_v, 0, 0, 2 * sizeof(float));
-        m_va.attachVB(m_vb_t, 1, 0, 2 * sizeof(float));
-        m_va.attachIB(m_ib);
+        m_b_v = t_app->bufferAllocator()->allocate(25 * 2 * sizeof(float) * 4);
+        m_b_t = t_app->bufferAllocator()->allocate(25 * 2 * sizeof(float) * 4);
+        m_b_i = t_app->bufferAllocator()->allocate(25 * 2 * sizeof(unsigned char) * 4);
+
+        m_va.attachVB(m_b_v, 0, 0, 2 * sizeof(float));
+        m_va.attachVB(m_b_t, 1, 0, 2 * sizeof(float));
+        m_va.attachIB(m_b_i);
         m_va.setAttrib(0, 0, 2, 0);
         m_va.setAttrib(1, 1, 2, 0);
     }
-
-    Quads::Quads(const int &t_num) :
-            m_max(t_num) {
-
-        if (m_max > 50)
-            m_max = 50;
-
-        m_va.attachVB(m_vb_v, 0, 0, 2 * sizeof(float));
-        m_va.attachVB(m_vb_t, 1, 0, 2 * sizeof(float));
-        m_va.attachIB(m_ib);
-        m_va.setAttrib(0, 0, 2, 0);
-        m_va.setAttrib(1, 1, 2, 0);
-    }
-
 
     int Quads::add(Rectf t_q, Rectf t_t) {
         if(m_count >= m_max)
@@ -61,9 +52,9 @@ namespace Iru {
 
 
 
-        m_vb_v.setData(sizeof(float) * m_vers.size(), m_vers.data());
-        m_vb_t.setData(sizeof(float) * m_texs.size(), m_texs.data());
-        m_ib.setData(sizeof(float) * m_ind.size(), m_ind.data());
+        m_b_v->setData(sizeof(float) * m_vers.size(),0 , m_vers.data());
+        m_b_t->setData(sizeof(float) * m_texs.size(),0 ,m_texs.data());
+        m_b_i->setData(sizeof(unsigned char) * m_ind.size(), 0, m_ind.data());
         return m_count++;
     }
 

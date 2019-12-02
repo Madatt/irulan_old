@@ -38,8 +38,8 @@ set(SOURCES
 
         src/irulan/System/App.cpp
 
-        src/irulan/Graph/3D/MeshData.cpp
-        src/irulan/System/Resources/Loaders/MeshLoader.cpp)
+        src/irulan/Graph/3D/Mesh/MeshData.cpp
+        src/irulan/System/Resources/Loaders/MeshLoader.cpp src/irulan/Graph/3D/Mesh/AnimatedMesh.cpp include/irulan/Graph/3D/Mesh/AnimatedMesh.h src/irulan/Graph/3D/Mesh/AnimatedMeshData.cpp include/irulan/Graph/3D/Mesh/AnimatedMeshData.h src/irulan/Graph/3D/Mesh/AnimatedMeshFrame.cpp include/irulan/Graph/3D/Mesh/AnimatedMeshFrame.h src/irulan/System/Memory/BufferAllocator.cpp include/irulan/System/Memory/BufferAllocator.h src/irulan/System/Memory/Buffer.cpp include/irulan/System/Memory/Buffer.h)
 
 include_directories(${INCLUDES})
 add_library(irulan ${SOURCES})

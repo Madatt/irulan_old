@@ -5,6 +5,7 @@
 #ifndef RSMOL_GAME_H
 #define RSMOL_GAME_H
 
+#include <irulan/System/Memory/BufferAllocator.h>
 #include "SDL2/SDL.h"
 #include "Graph/Render/RenderTarget.h"
 #include "Graph/Shader.h"
@@ -32,9 +33,13 @@ namespace Iru {
         MouseInfo &getMouseInfo();
         void setMousePosition(int t_x, int t_y);
         void showCursor(bool t_b);
+
+        BufferAllocator* bufferAllocator(){ return m_ba;};
+
     private:
         SDL_Window *m_window;
         SDL_GLContext m_context = nullptr;
+        BufferAllocator* m_ba;
 
         unsigned int m_ticks = 0;
         double m_accu = 0;

@@ -33,7 +33,7 @@ namespace Iru{
     ){
         (void)t_source; (void)t_type; (void)t_id;
         (void)t_severity; (void)t_length; (void)t_userParam;
-        //fprintf(stderr, "%s\n", t_message);
+        fprintf(stderr, "%s\n", t_message);
         if (t_severity==GL_DEBUG_SEVERITY_HIGH) {
             fprintf(stderr, "Aborting...\n");
             abort();

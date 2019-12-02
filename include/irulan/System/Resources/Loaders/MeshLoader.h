@@ -5,7 +5,7 @@
 #ifndef IRULAN_MESHLOADER_H
 #define IRULAN_MESHLOADER_H
 
-#include "Graph/3D/MeshData.h"
+#include "irulan/Graph/3D/Mesh/MeshData.h"
 
 namespace Iru::MeshLoader {
     std::vector<std::string> split(const std::string& t_str, char t_de);

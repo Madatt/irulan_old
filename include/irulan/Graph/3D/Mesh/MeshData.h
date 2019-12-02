@@ -12,15 +12,14 @@
 namespace Iru {
     class MeshData : public Resource{
     public:
-        MeshData() = default;
-        MeshData(std::vector<float> t_vers, std::vector<unsigned char> t_ind);
+        MeshData(std::vector<float> t_vers, int t_pn);
         ~MeshData() = default;
 
         const std::vector<float>& getData() const {return m_vers;};
-        const std::vector<unsigned char>& getInd() const {return m_ind;};
+        int getTriangles() const {return m_pn;};
     private:
         std::vector<float> m_vers;
-        std::vector<unsigned char> m_ind;
+        int m_pn = 0;
 
     };
 }

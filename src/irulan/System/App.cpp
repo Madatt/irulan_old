@@ -48,6 +48,7 @@ namespace Iru {
 
 
         glViewport(0, 0, getViewport().x, getViewport().y);
+        m_ba = new BufferAllocator;
         m_init = true;
     }
 

@@ -5,40 +5,19 @@
 #include "TestApp.h"
 
 TestApp::TestApp()
-        : App(Iru::Vector2i(1280, 720)) {
+        : App(Iru::Vector2i(1280, 720)), quads(this) {
 
 }
 
 void TestApp::draw(double t_delta) {
     clear();
 
-    Iru::Quaternion quat =
-            Iru::Quaternion::createRotation(Iru::Vector3f(0, 1, 0), test) * Iru::Quaternion::createRotation(Iru::Vector3f(1, 0, 0), -30);
-
-    dir = quat.toMatrix().apply(forw);
-
-
-
-    Iru::Vector3 pos = dir + frm;
-    Iru::Vector3 up = Iru::Vector3f(0, 1, 0);
-
-
-    View = Iru::Matrix::createLookAt(pos, frm, up);
-    Proj = Iru::Matrix::createPerspective(70, 1280.f / 720.f, 0.001f, 100000.f);
-
-    Proj *= View;
-
-
-    render(text);
+    //render(text);
     render(quads);
 
-    shd2->setMatrix("u_ort", Proj);
-    shd2->setMatrix("u_tra", Iru::Matrix::createScale(Iru::Vector3f(0.5, 0.5, 0.5)));
-    setVA(*va);
-    setShader(*shd2);
-    render(Iru::TRIANGLES, 0, c);
-
     flip();
+
+
 }
 
 void TestApp::step(double t_delta) {
@@ -128,18 +107,4 @@ void TestApp::init() {
 
     timer.reset();
 
-    addResource("mesh", Iru::MeshLoader::loadObj("teapot.obj"));
-
-    va = new Iru::VertexArray();
-    vb = new Iru::VertexBuffer();
-    ib = new Iru::VertexBuffer();
-
-    vb->setStorage(getResource<Iru::MeshData>("mesh")->getData().size() * sizeof(float),
-                   (void *) getResource<Iru::MeshData>("mesh")->getData().data());
-
-    c = getResource<Iru::MeshData>("mesh")->getData().size();
-    std::cout << c <<std::endl;
-
-    va->setAttrib(0, 0, 3, 0);
-    va->attachVB(*vb, 0, 0, 3 * sizeof(float));
 }

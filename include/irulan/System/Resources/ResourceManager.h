@@ -15,6 +15,7 @@ namespace Iru {
     public:
 
         template <typename T> const T* getResource(std::string t_name);
+        template <typename T> const T* get(std::string t_name);
         template <typename T> void addResource(std::string t_name, T t_r);
         void removeResource(std::string t_name);
 
@@ -31,6 +32,11 @@ namespace Iru {
     void ResourceManager::addResource(std::string t_name, T t_r) {
         T* tmp = new T(t_r);
         m_res.insert(std::make_pair(t_name, dynamic_cast<Resource*>(tmp)));
+    }
+
+    template<typename T>
+    const T *ResourceManager::get(std::string t_name) {
+        return getResource<T>(t_name);
     }
 
 }

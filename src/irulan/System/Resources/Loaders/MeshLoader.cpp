@@ -24,12 +24,18 @@ namespace Iru::MeshLoader {
 
     MeshData loadObj(std::string t_path) {
         std::vector<float> vers;
+        std::vector<float> norms;
         std::vector<float> texs;
         std::vector<unsigned char> ind;
         std::vector<float> comb;
 
         std::ifstream in(t_path);
         std::string curr;
+
+        std::vector<std::string> v[3];
+        std::string vs[3];
+
+        int pn = 0;
 
         while (in >> curr) {
             if (curr == "v") {
@@ -38,35 +44,42 @@ namespace Iru::MeshLoader {
                 vers.push_back(x);
                 vers.push_back(y);
                 vers.push_back(z);
-                //std::cout << "v " << x << " " << y << " " << z << std::endl;
-            } else if (curr == "f") {
-                std::string x, y, z;
-                std::vector<std::string> px, py, pz;
+            } else if (curr == "vn") {
+                float x, y, z;
                 in >> x >> y >> z;
-                px = split(x, '/');
-                py = split(y, '/');
-                pz = split(z, '/');
+                norms.push_back(x);
+                norms.push_back(y);
+                norms.push_back(z);
+            } else if (curr == "vt") {
+                unsigned char x, y;
+                in >> x >> y;
+                texs.push_back(x);
+                texs.push_back(y);
+            } else if (curr == "f") {
+                pn++;
+                in >> vs[0] >> vs[1] >> vs[2];
+                v[0] = split(vs[0], '/');
+                v[1] = split(vs[1], '/');
+                v[2] = split(vs[2], '/');
 
-
-                comb.push_back(vers[(std::stoi(px[0]) - 1) * 3]);
-                comb.push_back(vers[(std::stoi(px[0]) - 1) * 3 + 1]);
-                comb.push_back(vers[(std::stoi(px[0]) - 1) * 3 + 2]);
-                comb.push_back(vers[(std::stoi(pz[0]) - 1) * 3]);
-                comb.push_back(vers[(std::stoi(pz[0]) - 1) * 3 + 1]);
-                comb.push_back(vers[(std::stoi(pz[0]) - 1) * 3 + 2]);
-                comb.push_back(vers[(std::stoi(py[0]) - 1) * 3]);
-                comb.push_back(vers[(std::stoi(py[0]) - 1) * 3 + 1]);
-                comb.push_back(vers[(std::stoi(py[0]) - 1) * 3 + 2]);
-
-
-
-
-                //std::cout << "f " << std::stoi(px[0]) - 1 << " " << std::stoi(py[0]) - 1 << " " << std::stoi(pz[0]) - 1 << std::endl;
-                //std::cout << std::stoi(px[0]) - 1<< std::endl;
+                for (auto &i : v) {
+                    comb.push_back(vers[(std::stoi(i[0]) - 1) * 3]);
+                    comb.push_back(vers[(std::stoi(i[0]) - 1) * 3 + 1]);
+                    comb.push_back(vers[(std::stoi(i[0]) - 1) * 3 + 2]);
+                    if (i.size() > 1 and !i[1].empty()) {
+                        comb.push_back(norms[(std::stoi(i[1]) - 1) * 3]);
+                        comb.push_back(norms[(std::stoi(i[1]) - 1) * 3 + 1]);
+                        comb.push_back(norms[(std::stoi(i[1]) - 1) * 3 + 2]);
+                    }
+                    if (i.size() == 3) {
+                        norms.push_back(texs[(std::stoi(i[1]) - 1) * 3]);
+                        norms.push_back(texs[(std::stoi(i[1]) - 1) * 3 + 1]);
+                    }
+                }
             }
         }
 
 
-        return MeshData(comb, ind);
+        return MeshData(comb, pn);
     }
 }

@@ -11,10 +11,11 @@
 #include "Graph/Texture2D.h"
 
 namespace Iru {
+    class App;
+
     class Quads : public Drawable {
     public:
-        Quads();
-        Quads(const int &t_num);
+        Quads(App* t_app);
         virtual ~Quads() = default;
 
         void draw(RenderTarget &t_ren) override;
@@ -27,12 +28,14 @@ namespace Iru {
         void setTransform(const Matrix &t_tra){m_tra = t_tra;};
 
     protected:
+        App* m_app;
         VertexArray m_va;
-        VertexBuffer m_vb_v;
-        VertexBuffer m_vb_t;
-        VertexBuffer m_ib;
+        Buffer* m_b_v;
+        Buffer* m_b_t;
+        Buffer* m_b_i;
         const Texture2D* m_tex;
         const Shader* m_sh;
+
 
         std::vector<float> m_vers;
         std::vector<float> m_texs;
