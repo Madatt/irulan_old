@@ -26,6 +26,7 @@ namespace Iru {
 
     private:
         GLObject<GLVertexArray> m_ptr;
+        unsigned int m_i_off = 0;
 
     };
 }

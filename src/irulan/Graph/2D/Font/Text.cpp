@@ -8,12 +8,22 @@
 #include <iostream>
 
 namespace Iru {
-    Text::Text() {
-        m_va.attachVB(m_vb, 0, 0, 4 * sizeof(float));
-        m_va.attachVB(m_vb, 1, 2 * sizeof(float), 4 * sizeof(float));
-        m_va.attachIB(m_ib);
+    Text::Text(App *t_app)
+            : m_app(t_app) {
+
+        m_b_v = t_app->bufferAllocator()->allocate(255 * 2 * sizeof(float) * 4);
+        m_b_i = t_app->bufferAllocator()->allocate(255 * 2 * sizeof(float) * 4);
+
+        m_va.attachVB(m_b_v, 0, 0, 4 * sizeof(float));
+        m_va.attachVB(m_b_v, 1, 2 * sizeof(float), 4 * sizeof(float));
+        m_va.attachIB(m_b_i);
         m_va.setAttrib(0, 0, 2, 0);
         m_va.setAttrib(1, 1, 2, 0);
+    }
+
+    Text::~Text() {
+        delete m_b_v;
+        delete m_b_i;
     }
 
     void Text::construct(const std::string &t_text) {
@@ -76,8 +86,8 @@ namespace Iru {
             m_count++;
         }
 
-        m_vb.setData(sizeof(float) * m_data.size(), m_data.data());
-        m_ib.setData(sizeof(float) * m_ind.size(), m_ind.data());
+        m_b_v->setData(sizeof(float) * m_data.size(), 0, m_data.data());
+        m_b_i->setData(sizeof(float) * m_ind.size(), 0, m_ind.data());
 
     }
 

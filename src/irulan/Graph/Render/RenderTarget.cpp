@@ -58,7 +58,7 @@ namespace Iru {
 
         glBindVertexArray(m_va->m_ptr.get());
         glUseProgram(m_shader->m_ptr.get());
-        glDrawElements(t_type, t_c, GL_UNSIGNED_BYTE, (void *) t_offset);
+        glDrawElements(t_type, t_c, GL_UNSIGNED_BYTE, (void *) (t_offset + m_va->m_i_off));
     }
 
     void RenderTarget::renderInstanced(Polygon t_type, int t_s, int t_c, int t_ic) {

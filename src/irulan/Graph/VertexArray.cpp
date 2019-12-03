@@ -26,10 +26,12 @@ namespace Iru {
 
     void VertexArray::attachIB(const VertexBuffer &t_vb) {
         glVertexArrayElementBuffer(m_ptr.get(), t_vb.m_ptr.get());
+        m_i_off = 0;
     }
 
     void VertexArray::attachIB(const Buffer* t_b) {
         glVertexArrayElementBuffer(m_ptr.get(), t_b->m_bb->vb);
+        m_i_off = t_b->m_bb->offset;
     }
     void VertexArray::setAttrib(unsigned int t_vi, unsigned int t_i, unsigned int t_count, unsigned int t_off) {
         glBindVertexArray(m_ptr.get());

@@ -2,8 +2,8 @@
 // Created by Madatt on 02.12.2019.
 //
 
-#include <irulan/System/Memory/Buffer.h>
-#include <glad/glad.h>
+#include "irulan/System/Memory/Buffer.h"
+#include "glad/glad.h"
 #include <iostream>
 #include "irulan/System/Memory/BufferAllocator.h"
 
@@ -22,7 +22,8 @@ namespace Iru {
                 curr->free = false;
                 curr->size = t_size;
 
-                std::cout << "Allocated: " << t_size << ", vb: " << curr->vb << std::endl;
+                std::cout << "Allocated new buffer: " << t_size << ", vb = " << curr->vb << std::endl;
+
                 if(ns > 0)
                 {
                     auto nb = new BufferBlock;
@@ -34,14 +35,13 @@ namespace Iru {
                     nb->offset = curr->offset + t_size;
                     nb->ptr = curr->ptr;
                     curr->next = nb;
-                    std::cout << "New block: " << ns << ", offset: " << (int)(nb->ptr) + nb->offset << ", vb: " << nb->vb << std::endl;
                 }
 
                 return bf;
             }
         }
 
-        newBlock(POOL_SIZE);
+        newBlock(t_size > POOL_SIZE ? t_size : POOL_SIZE);
         return allocate(t_size);
     }
 
@@ -50,25 +50,23 @@ namespace Iru {
     }
 
     void BufferAllocator::newBlock(int t_size) {
+        auto nw = new BufferBlock;
+        nw->free = true;
+        nw->size = t_size;
+        nw->id = m_nid++;
+        glCreateBuffers(1, &(nw->vb));
+        glNamedBufferStorage(nw->vb, t_size, nullptr, GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
+        nw->ptr = glMapNamedBufferRange(nw->vb, 0, t_size, GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
+
+
         if(m_head == nullptr)
-        {
-            m_head = new BufferBlock;
-            m_head->free = true;
-            m_head->size = t_size;
-            m_head->id = m_nid++;
-            glCreateBuffers(1, &(m_head->vb));
-            glNamedBufferStorage(m_head->vb, t_size, nullptr, GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
-            m_head->ptr = glMapNamedBufferRange(m_head->vb, 0, t_size, GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
-        }else {
-            auto nw = new BufferBlock;
+            m_head = nw;
+        else
             m_head->last()->next = nw;
-            nw->free = true;
-            nw->size = t_size;
-            nw->id = m_nid++;
-            glCreateBuffers(1, &(nw->vb));
-            glNamedBufferStorage(nw->vb, t_size, nullptr, GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
-            nw->ptr = glMapNamedBufferRange(nw->vb, 0, t_size, GL_MAP_WRITE_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
-        }
+
+    }
+
+    void BufferAllocator::swipe() {
 
     }
 }

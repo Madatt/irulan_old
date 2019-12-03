@@ -16,7 +16,7 @@ namespace Iru {
     class Quads : public Drawable {
     public:
         Quads(App* t_app);
-        virtual ~Quads() = default;
+        virtual ~Quads();
 
         void draw(RenderTarget &t_ren) override;
 
@@ -35,7 +35,6 @@ namespace Iru {
         Buffer* m_b_i;
         const Texture2D* m_tex;
         const Shader* m_sh;
-
 
         std::vector<float> m_vers;
         std::vector<float> m_texs;

@@ -43,6 +43,7 @@ namespace Iru {
         unsigned int m_nid = 0;
 
         void newBlock(int t_size);
+        void swipe();
     };
 }
 

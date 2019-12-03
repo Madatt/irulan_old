@@ -23,10 +23,8 @@
 #include "Graph/VertexArray.h"
 #include "Graph/Texture2D.h"
 #include "Graph/Shader.h"
-
 #include "Graph/Render/RenderTarget.h"
-#include "irulan/Graph/2D/Quads.h"
-
+#include "Graph/2D/Quads.h"
 #include "Graph/2D/Font/Text.h"
 #include "Graph/2D/Font/BitmapFont.h"
 

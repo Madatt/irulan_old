@@ -17,20 +17,7 @@ private:
     void step(double) override;
 
     Iru::Shader *shd{};
-    Iru::Shader *shd2{};
-
-    Iru::VertexBuffer *vb{};
-    Iru::VertexBuffer *ib{};
-    Iru::VertexArray *va{};
-
-
-    Iru::Matrix Proj;
-    Iru::Matrix View;
     float test = 3;
-
-    Iru::Vector3f dir;
-    Iru::Vector3f forw;
-    Iru::Vector3f frm;
 
     Iru::Texture2D tex;
     Iru::Texture2D tex2;

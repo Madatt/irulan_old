@@ -5,14 +5,14 @@
 #include "TestApp.h"
 
 TestApp::TestApp()
-        : App(Iru::Vector2i(1280, 720)), quads(this) {
+        : App(Iru::Vector2i(1280, 720)), quads(this), text(this) {
 
 }
 
 void TestApp::draw(double t_delta) {
     clear();
 
-    //render(text);
+    render(text);
     render(quads);
 
     flip();
@@ -76,12 +76,6 @@ void TestApp::init() {
 
 
     shd = new Iru::Shader(vers, frags);
-    shd2 = new Iru::Shader(vers2, frags2);
-
-    forw = Iru::Vector3f(0, 0, 4);
-    dir = Iru::Vector3f(0, 0, 4);
-    frm = Iru::Vector3f(0.5, 0, 0);
-
 
     tex = Iru::Texture2D::_loadBMP("font.bmp");
     tex2 = Iru::Texture2D::_loadBMP("test.bmp");

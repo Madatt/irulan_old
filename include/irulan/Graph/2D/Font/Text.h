@@ -15,7 +15,8 @@
 namespace Iru {
     class Text : public Drawable {
     public:
-        Text();
+        Text(App* t_app);
+        ~Text();
 
         void setFont(const BitmapFont& t_font){m_font = &t_font;};
         void set(const std::string &t_text);
@@ -24,9 +25,10 @@ namespace Iru {
         void setTexture(const Texture2D& t_tex){m_tex = &t_tex;};
         void setTransform(const Matrix &t_tra){m_tra = t_tra;};
     private:
+        App* m_app;
         VertexArray m_va;
-        VertexBuffer m_vb;
-        VertexBuffer m_ib;
+        Buffer* m_b_v;
+        Buffer* m_b_i;
         const Shader* m_sh;
         const Texture2D* m_tex;
 

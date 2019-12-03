@@ -21,25 +21,24 @@ set(SOURCES
         src/irulan/Graph/VertexBuffer.cpp
         src/irulan/Graph/Shader.cpp
         src/irulan/Graph/Texture2D.cpp
-
         src/irulan/Graph/2D/Font/BitmapFont.cpp
         src/irulan/Graph/2D/Font/Text.cpp
-
         src/irulan/Graph/Render/RenderTarget.cpp
         src/irulan/Graph/2D/Quads.cpp
+        src/irulan/Graph/3D/Mesh/MeshData.cpp
 
         src/irulan/System/Resources/Resource.cpp
         src/irulan/System/Resources/ResourceManager.cpp
+        src/irulan/System/OpenGL/Debug.cpp
+        src/irulan/System/OpenGL/GLTraits.cpp
+        src/irulan/System/Resources/Loaders/MeshLoader.cpp
+        src/irulan/System/Memory/BufferAllocator.cpp
+        src/irulan/System/Memory/Buffer.cpp
+        src/irulan/System/App.cpp
 
         src/irulan/Misc/Timer.cpp
 
-        src/irulan/System/OpenGL/Debug.cpp
-        src/irulan/System/OpenGL/GLTraits.cpp
-
-        src/irulan/System/App.cpp
-
-        src/irulan/Graph/3D/Mesh/MeshData.cpp
-        src/irulan/System/Resources/Loaders/MeshLoader.cpp src/irulan/Graph/3D/Mesh/AnimatedMesh.cpp include/irulan/Graph/3D/Mesh/AnimatedMesh.h src/irulan/Graph/3D/Mesh/AnimatedMeshData.cpp include/irulan/Graph/3D/Mesh/AnimatedMeshData.h src/irulan/Graph/3D/Mesh/AnimatedMeshFrame.cpp include/irulan/Graph/3D/Mesh/AnimatedMeshFrame.h src/irulan/System/Memory/BufferAllocator.cpp include/irulan/System/Memory/BufferAllocator.h src/irulan/System/Memory/Buffer.cpp include/irulan/System/Memory/Buffer.h)
+        )
 
 include_directories(${INCLUDES})
 add_library(irulan ${SOURCES})
