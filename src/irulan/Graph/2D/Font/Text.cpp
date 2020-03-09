@@ -11,8 +11,8 @@ namespace Iru {
     Text::Text(App *t_app)
             : m_app(t_app) {
 
-        m_b_v = t_app->bufferAllocator()->allocate(255 * 2 * sizeof(float) * 4);
-        m_b_i = t_app->bufferAllocator()->allocate(255 * 2 * sizeof(float) * 4);
+        m_b_v = t_app->bufferAllocator()->newBuffer(255 * 2 * sizeof(float) * 4);
+        m_b_i = t_app->bufferAllocator()->newBuffer(255 * 2 * sizeof(float) * 4);
 
         m_va.attachVB(m_b_v, 0, 0, 4 * sizeof(float));
         m_va.attachVB(m_b_v, 1, 2 * sizeof(float), 4 * sizeof(float));

@@ -35,8 +35,8 @@ namespace Iru {
         BufferAllocator();
         ~BufferAllocator() = default;
 
-        Buffer* allocate(int t_size);
-        void free(Buffer* t_bf);
+        Buffer* newBuffer(int t_size);
+        void freeBuffer(Buffer* t_bf);
 
     private:
         BufferBlock* m_head = nullptr;
@@ -46,5 +46,8 @@ namespace Iru {
         void swipe();
     };
 }
+
+
+
 
 #endif //IRULAN_BUFFERALLOCATOR_H

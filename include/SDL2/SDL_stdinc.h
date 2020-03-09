@@ -569,7 +569,7 @@ extern DECLSPEC char *SDLCALL SDL_iconv_string(const char *tocode,
 #define SDL_malloc malloc
 #define SDL_calloc calloc
 #define SDL_realloc realloc
-#define SDL_free free
+#define SDL_free freeBuffer
 #define SDL_memset memset
 #define SDL_memcpy memcpy
 #define SDL_memmove memmove

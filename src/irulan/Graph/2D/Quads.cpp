@@ -11,9 +11,9 @@ namespace Iru {
             m_app(t_app) {
         m_max = 25;
 
-        m_b_v = t_app->bufferAllocator()->allocate(25 * 2 * sizeof(float) * 4);
-        m_b_t = t_app->bufferAllocator()->allocate(25 * 2 * sizeof(float) * 4);
-        m_b_i = t_app->bufferAllocator()->allocate(25 * 2 * sizeof(unsigned char) * 4);
+        m_b_v = t_app->bufferAllocator()->newBuffer(25 * 2 * sizeof(float) * 4);
+        m_b_t = t_app->bufferAllocator()->newBuffer(25 * 2 * sizeof(float) * 4);
+        m_b_i = t_app->bufferAllocator()->newBuffer(25 * 2 * sizeof(unsigned char) * 4);
 
         m_va.attachVB(m_b_v, 0, 0, 2 * sizeof(float));
         m_va.attachVB(m_b_t, 1, 0, 2 * sizeof(float));

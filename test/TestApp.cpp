@@ -12,8 +12,8 @@ TestApp::TestApp()
 void TestApp::draw(double t_delta) {
     clear();
 
-    render(text);
     render(quads);
+    render(text);
 
     flip();
 
@@ -90,7 +90,7 @@ void TestApp::init() {
                       Iru::Matrix::createScale(Iru::Vector3f(5, 5, 0)) *
                       Iru::Matrix::createRotation(Iru::Vector3f(0, 0, 1.f), 45.f));
 
-    str = "huj dziala\nomg, nawet\nmultilinie!!";
+    str = "dziala\nomg, nawet\nmultilinie!!";
     text.set(str);
 
     quads.add(Iru::Rectf(0, 0, 128, 128), Iru::Rectf(0, 0, 1, 1));

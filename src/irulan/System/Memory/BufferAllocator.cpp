@@ -12,7 +12,7 @@ namespace Iru {
         newBlock(POOL_SIZE);
     }
 
-    Buffer *BufferAllocator::allocate(int t_size) {
+    Buffer *BufferAllocator::newBuffer(int t_size) {
         for(auto curr = m_head; curr != nullptr; curr = curr->next)
         {
             if(curr->size >= t_size and curr->free)
@@ -42,10 +42,10 @@ namespace Iru {
         }
 
         newBlock(t_size > POOL_SIZE ? t_size : POOL_SIZE);
-        return allocate(t_size);
+        return newBuffer(t_size);
     }
 
-    void BufferAllocator::free(Buffer *t_bf) {
+    void BufferAllocator::freeBuffer(Buffer *t_bf) {
         t_bf->m_bb->free = true;
     }
 

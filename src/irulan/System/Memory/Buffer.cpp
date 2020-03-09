@@ -7,7 +7,7 @@
 
 namespace Iru {
     Buffer::~Buffer() {
-        m_bb->ba->free(this);
+        m_bb->ba->freeBuffer(this);
     }
 
     Buffer::Buffer(BufferBlock *t_bb)
